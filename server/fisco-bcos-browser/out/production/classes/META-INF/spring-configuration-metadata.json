@@ -1,0 +1,60 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "org.bcos.browser.base.Constants",
+      "name": "constant",
+      "type": "org.bcos.browser.base.Constants"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "org.bcos.browser.base.Constants",
+      "defaultValue": "0 0 0\/1 * * ?",
+      "name": "constant.cron-aync-node",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.bcos.browser.base.Constants",
+      "defaultValue": "0\/10 * * * * ?",
+      "name": "constant.cron-block-chain-info",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.bcos.browser.base.Constants",
+      "defaultValue": "0\/10 * * * * ?",
+      "name": "constant.cron-block-info",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.bcos.browser.base.Constants",
+      "defaultValue": "0 0 * * * ?",
+      "name": "constant.cron-delete-txn",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.bcos.browser.base.Constants",
+      "defaultValue": "0\/10 * * * * ?",
+      "name": "constant.cron-if-node-active",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.bcos.browser.base.Constants",
+      "defaultValue": "30 0\/1 * * * ?",
+      "name": "constant.cron-txn-by-day",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.bcos.browser.base.Constants",
+      "defaultValue": 50,
+      "name": "constant.handle-blocks",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "org.bcos.browser.base.Constants",
+      "defaultValue": 500000,
+      "name": "constant.keep-txn-cnt",
+      "type": "java.lang.Integer"
+    }
+  ]
+}

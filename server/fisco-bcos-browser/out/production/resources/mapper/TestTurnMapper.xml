@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bcos.browser.mapper.TestTurnMapper">
+    <select id="getTestTurnList" resultType="org.bcos.browser.entity.dto.TestTurn">
+        SELECT test_name as testName,
+               succ_num as succNum,
+               fail_num as failNum,
+               constract_script as contractScript,
+               send_rate as sendRate,
+               max_latency as maxLatency,
+               min_latency as minLatency,
+               through_put as throughPut,
+               test_id as testId,
+               testturn_id as testTurnId
+        FROM tb_testturn
+    </select>
+</mapper>

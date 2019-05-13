@@ -4,9 +4,5 @@
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="fisco-bcos-browser.main" target="1.8" />
-      <module name="fisco-bcos-browser.test" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

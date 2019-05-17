@@ -1,0 +1,28 @@
+{
+	"timestamp": 1557921026,
+	"rounds":[
+		{
+			"name": "open",
+			"success": 100,
+			"failed": 0,
+			"sendRate": 20.0,
+			"maxLatency": 0.5,
+			"minLatency": 0.1,
+			"throughput": 19.5,
+			"resource": [
+				{
+					"type": "docker",
+					"name": "fisco-1",
+					"maxCPU": 0.50,
+					"avgCPU": 0.20,
+					"maxMemory": 80030230,
+					"avgMemory": 71313100,
+					"trafficIn": 0,
+					"trafficOut": 0,
+					"discRead": 3200,
+					"discWrite": 3200
+				}
+			]
+		}
+	]
+}

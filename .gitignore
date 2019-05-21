@@ -1,2 +1,5 @@
 
 server/fisco-bcos-browser/.gradle/5.4.1/fileChanges/last-build.bin
+server/fisco-bcos-browser/.idea/workspace.xml
+*.gz
+*.log

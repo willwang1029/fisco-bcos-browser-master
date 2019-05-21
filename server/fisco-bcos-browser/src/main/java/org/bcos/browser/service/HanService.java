@@ -1,8 +1,10 @@
 package org.bcos.browser.service;
 
+import com.alibaba.fastjson.JSON;
 import org.bcos.browser.base.ConstantCode;
 import org.bcos.browser.entity.base.BaseResponse;
 import org.bcos.browser.util.JsonReadUtils;
+import org.bcos.browser.util.ProcessUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,7 @@ import java.util.Map;
 @Service
 public class HanService {
 
-    public BaseResponse getTimeStamp(){
+    public BaseResponse getTimeStamp() {
         try {
             JSONObject json = JsonReadUtils.readJson("report.json");
             BaseResponse response = new BaseResponse(ConstantCode.SUCCESS);
@@ -25,7 +27,7 @@ public class HanService {
         }
     }
 
-    public BaseResponse RoundName(){
+    public BaseResponse RoundName() {
         try {
             JSONObject json = JsonReadUtils.readJson("report.json");
             BaseResponse response = new BaseResponse(ConstantCode.SUCCESS);
@@ -37,6 +39,29 @@ public class HanService {
                 map.put("name", object.get("name").toString());
             }
             response.setData(map);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new BaseResponse(ConstantCode.SYSTEM_ERROR);
+        }
+    }
+
+    public BaseResponse getJson() {
+        JSONObject json = JsonReadUtils.readJson("report.json");
+        try {
+            BaseResponse response = new BaseResponse(ConstantCode.SUCCESS);
+            response.setData(JSON.parseObject(json.toString()));
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new BaseResponse(ConstantCode.SYSTEM_ERROR);
+        }
+    }
+
+    public BaseResponse startShell() {
+        try {
+            BaseResponse response = new BaseResponse(ConstantCode.SUCCESS);
+            response.setData(ProcessUtils.start("test.sh"));
             return response;
         } catch (Exception e) {
             e.printStackTrace();

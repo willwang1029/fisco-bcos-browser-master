@@ -64,7 +64,7 @@ export default {
         },
         {
             label: '查看测试报告',
-            route: 'test',
+            route: 'testDetail',
             class: 'bg-89c3f8 margin-top-15  margin-left-15',
         }
     ],
@@ -98,6 +98,10 @@ export default {
             title: '区块链信息',
             subMenu: [
                 {
+                    title: '实时信息概览',
+                    name: 'home',
+                },
+                {
                     title: '查看区块',
                     name: 'block',
                 },
@@ -105,26 +109,19 @@ export default {
                     title: '查看交易',
                     name: 'transaction',
                 },
+            ]
+        },
+        {
+            title: '区块链测试',
+            subMenu:[
                 {
-                    title: '查看测试报告',
-                    name: 'test',
+                    title: '性能测试配置',
+                    name: 'testConfig',
                 },
-                // {
-                //     title: '正在处理的交易',
-                //     name: 'pendingTransaction',
-                // },
-                // {
-                //     title: '统计指标',
-                //     name: 'singleStatistics',
-                // },
-                // {
-                //     title: '交易流',
-                //     name: 'transactionStatistics'
-                // },
-                // {
-                //     title: '共识流',
-                //     name: 'blockStatistics',
-                // }
+                {
+                    title: '性能测试结果',
+                    name: 'testDetail',
+                }
             ]
         }
     ],

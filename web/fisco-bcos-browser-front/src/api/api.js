@@ -212,3 +212,29 @@ export function getTestList(data){
         data: data
     })
 }
+
+export function getJson(data) {
+    return get({
+        url: `${url.GET_JSON}`,
+        method: 'get',
+        data: data
+    })
+}
+
+export function startShell(data) {
+    return get({
+        url: `${url.START_SHELL}`,
+        method: 'get',
+        data: data
+    })
+}
+
+export function stopShell(data) {
+    return get({
+        url: `${url.STOP_SHELL}`,
+        method: 'get',
+        data: data
+    })
+}
+
+

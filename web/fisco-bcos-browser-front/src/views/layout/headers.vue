@@ -18,9 +18,11 @@
                         <i v-if="groupList.length" class="el-icon-caret-top icon-down icon"></i>
                     </div>
                 </div>
+
                 <div class="nav-menu">
-                    <div class="nav-menu-item nav-item" @click="routerLink('index')">首页</div>
-                    <div class="nav-menu-item nav-item" @click="routerLink('home')">实时信息概览</div>
+                    <el-button type="primary" @click="startshell" class="header-button1">启动FISCO BCOS测试链</el-button>
+                    <el-button type="primary" @click="stopshell" class="header-button2">暂停FISCO BCOS测试链</el-button>
+                    <div class="nav-menu-item nav-item" @click="routerLink('home')">首页</div>
                     <div class="nav-menu-item nav-item" v-for="item in menu" :key='item.title'>{{item.title}}
                         <i class="el-icon-caret-bottom icon-up"></i>
                         <i class="el-icon-caret-top icon-down"></i>
@@ -28,7 +30,6 @@
                             <li class="option" v-for="list in item.subMenu" :key="list.name" @click="routerLink(list.name)">{{list.title}}</li>
                         </ul>
                     </div>
-                    <div class="nav-menu-item nav-item" @click="routerLink('help')">帮助</div>
                 </div>
             </div>
         </div>
@@ -39,8 +40,9 @@
 import url from "@/api/url";
 import router from "@/router";
 import constant from "@/util/constant";
-import { message } from "@/util/util";
+import { message,goPage } from "@/util/util";
 import Bus from "@/bus"
+import {startShell, stopShell} from "../../api/api";
 
 export default {
     name: "headers",
@@ -50,7 +52,9 @@ export default {
             groupList: [],
             groupName: "",
             chainNone: false,
-            groupId: ""
+            groupId: "",
+            active: 0,
+            chainType: this.$route.query.chainType || "01",
         };
     },
       mounted: function () {
@@ -95,6 +99,20 @@ export default {
             router.push({
                 name: 'home'
             });
+        },
+        next() {
+            if (this.active++ > 2) this.active = 0;
+        },
+        linkPage: function (name,label,data) {
+            return goPage(name,label,data);
+        },
+        startshell:function () {
+            let result="";
+            startShell(result);
+        },
+        stopshell:function () {
+            let result="";
+            stopShell(result);
         }
     }
 };
@@ -280,5 +298,12 @@ export default {
     position: absolute;
     left: 101%;
     top: 42%;
+}
+
+.header-button1{
+    margin-right: 50px;
+}
+.header-button2{
+    margin-right: 20px;
 }
 </style>

@@ -17,10 +17,57 @@
 					"avgCPU": 0.20,
 					"maxMemory": 80030230,
 					"avgMemory": 71313100,
-					"trafficIn": 0,
+					"trafficIn": 1,
 					"trafficOut": 0,
 					"discRead": 3200,
 					"discWrite": 3200
+				},
+				{
+					"type": "maven",
+					"name": "fisco-2",
+					"maxCPU": 0.70,
+					"avgCPU": 0.30,
+					"maxMemory": 70010420,
+					"avgMemory": 18851800,
+					"trafficIn": 0,
+					"trafficOut": 0,
+					"discRead": 6400,
+					"discWrite": 1600
+				}
+			]
+		},
+		{
+			"name": "git",
+			"success": 1000,
+			"failed": 3,
+			"sendRate": 30.0,
+			"maxLatency": 0.7,
+			"minLatency": 0.2,
+			"throughput": 17.1,
+			"resource": [
+				{
+					"type": "docker",
+					"name": "fisco-3",
+					"maxCPU": 0.90,
+					"avgCPU": 0.10,
+					"maxMemory": 90010120,
+					"avgMemory": 20101800,
+					"trafficIn": 0,
+					"trafficOut": 0,
+					"discRead": 1600,
+					"discWrite": 1600
+				},
+				{
+					"type": "maven",
+					"name": "fisco-4",
+					"maxCPU": 0.70,
+					"avgCPU": 0.30,
+					"maxMemory": 60000360,
+					"avgMemory": 42146000,
+					"trafficIn": 0,
+					"trafficOut": 0,
+					"discRead": 6400,
+					"discWrite": 6400
 				}
 			]
 		}

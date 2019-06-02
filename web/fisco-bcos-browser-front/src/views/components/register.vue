@@ -1,28 +1,31 @@
 <template>
     <div class="login-container">
         <div class="cover-container">
-            <div class="login-title">平台登陆</div>
-            <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" label-position="left">
+            <div class="register-title">新用户注册</div>
+            <el-form ref="loginForm" :model="registerForm" :rules="registerRules" class="register-form" label-position="left">
 
                 <el-form-item prop="username">
                     <label>用户名：</label>
-                    <el-input :type="text" v-model="loginForm.username" placeholder="请输入用户名" name="username" auto-complete="on"></el-input>
+                    <el-input :type="text" v-model="registerForm.username" placeholder="请输入用户名" name="username" auto-complete="on"></el-input>
+                </el-form-item>
+
+                <el-form-item prop="email">
+                    <label>邮箱：</label>
+                    <el-input :type="text" v-model="registerForm.email" placeholder="请输入邮箱" name="email" style="margin-left: 12px" auto-complete="on"></el-input>
                 </el-form-item>
 
                 <el-form-item prop="password">
                     <label>密码：</label>
-                    <el-input :type="passwordType" v-model="loginForm.password" placeholder="请输入密码" style="margin-left: 12px" name="password" auto-complete="on" @keyup.enter.native="handleLogin">
-
-                    </el-input>
+                    <el-input :type="passwordType" v-model="registerForm.password" placeholder="请输入密码" style="margin-left: 12px" name="password"
+                              auto-complete="on"></el-input>
                 </el-form-item>
 
-                <el-button :loading="loading" type="primary" style="width: 100%;margin-top: 20px;" @click.native.prevent="handleLogin">
-                    登陆
+                <el-button :loading="loading" type="primary" style="width: 100%;margin-top: 20px;">
+                    注册
                 </el-button>
 
                 <el-row style="margin-top: 20px;margin-left: 50px">
-                    <el-button type="text">忘记密码</el-button>
-                    <el-button type="text" style="margin-left: 80px">注册账号</el-button>
+                    <el-button type="text" style="margin-left: 80px">去登陆</el-button>
                 </el-row>
             </el-form>
             <div class="shadow-bottom shadow-1"></div>
@@ -33,7 +36,7 @@
 
 <script>
     export default {
-        name: "index",
+        name: "register",
         data:function () {
             const validateUsername = (rule, value, callback) => {
                 if (!isvalidUsername(value)) {
@@ -54,11 +57,12 @@
             return{
                 loading:false,
                 companyName:'fisco-bcos网站',
-                loginForm:{
+                registerForm:{
                     username:'',
+                    email:'',
                     password:'',
                 },
-                loginRules:{
+                registerRules:{
                     username: [{ required: true, trigger: 'blur', validator: validateUsername }],
                     password: [{ required: true, trigger: 'blur', validator: validatePassword }]
                 },
@@ -75,54 +79,31 @@
                     this.passwordType = 'password'
                 }
             },
-            handleLogin() {
-                this.$refs.loginForm.validate(valid => {
-                    if (valid) {
-                        this.loading = true
-                        this.$store
-                            .dispatch('LoginByUsername', this.loginForm)
-                            .then(() => {
-                                this.loading = false
-                                this.$router.replace({ path: this.redirect || '/' })
-                            }, (res) => {
-                                let errorMsg = res && res.msg || '登录失败'
-                                this.loading = false
-                                this.$message.error(errorMsg)
-                            })
-                            .catch(() => {
-                                this.loading = false
-                            })
-                    } else {
-                        console.log('error submit!!')
-                        return false
-                    }
-                })
-            },
         }
     }
 </script>
 
 <style scoped>
-.login-container{
-    min-height: 100%;
-    width: 100%;
-    background-color: #3b3e54;
-    overflow: hidden;
-    border: 0;
-}
-    .login-title{
-        padding-top: 80px;
+    .login-container{
+        min-height: 100%;
+        width: 100%;
+        background-color: #3b3e54;
+        overflow: hidden;
+        border: 0;
+    }
+    .register-title{
+        padding-top: 60px;
         font-size: 40px;
         font-weight: 500;
         color: rgb(24,144,255);
         line-height: 56px;
         text-align: center;
     }
-    .login-form{
+    .register-form{
         position: relative;
         width:300px;
         max-width: 100%;
-        padding: 60px 35px 0;
+        padding: 50px 35px 0;
         margin: 0 auto;
         overflow: hidden;
     }
@@ -147,26 +128,26 @@
         width: 30px;
         display: inline-block;
     }
-.el-input {
-    display: inline-block;
-    height: 47px;
-    width: 75%;
-}
-.shadow-bottom {
-    bottom: 0;
-    position: absolute;
-    border-radius: 10px;
-}
-.shadow-1 {
-    height: 20px;
-    width: 98%;
-    left: 1%;
-    box-shadow: 0 10px 0 rgba(255,255,255,0.8);
-}
-.shadow-2 {
-    height: 30px;
-    width: 96%;
-    left: 2%;
-    box-shadow: 0 20px 0 rgba(255,255,255,0.3);
-}
+    .el-input {
+        display: inline-block;
+        height: 47px;
+        width: 75%;
+    }
+    .shadow-bottom {
+        bottom: 0;
+        position: absolute;
+        border-radius: 10px;
+    }
+    .shadow-1 {
+        height: 20px;
+        width: 98%;
+        left: 1%;
+        box-shadow: 0 10px 0 rgba(255,255,255,0.8);
+    }
+    .shadow-2 {
+        height: 30px;
+        width: 96%;
+        left: 2%;
+        box-shadow: 0 20px 0 rgba(255,255,255,0.3);
+    }
 </style>

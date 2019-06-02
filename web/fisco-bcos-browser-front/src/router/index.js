@@ -17,6 +17,16 @@ Vue.use(Router)
     // mode: 'history',
     // base: '/COMS',
 const routes = [
+        {
+            path:'/index',
+            name:'index',
+            component:resolve => require(['@/views/components/index'],resolve),
+        },
+        {
+            path:'/register',
+            name:'register',
+            component:resolve => require(['@/views/components/register'],resolve),
+        },
         // {
         //     path: '/project',
         //     name: 'project',
@@ -127,12 +137,12 @@ const routes = [
                 component:resolve => require(['@/views/components/test'],resolve),
             },
             {
-                path:'/index',
-                name:'index',
+                path:'/testConfig',
+                name:'testConfig',
                 meta:{
                     requireAuth:true,
                 },
-                component:resolve => require(['@/views/components/index'],resolve),
+                component:resolve => require(['@/views/components/testConfig'],resolve),
             },
         ]
         }

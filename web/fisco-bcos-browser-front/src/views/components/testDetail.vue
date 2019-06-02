@@ -4,7 +4,7 @@
             测试时间：{{testTime}}
         </p>
         <h1 class="test-text">Summary</h1>
-        <div class="home-center">
+        <div class="home-center1">
             <el-table :data="roundsData"  :header-cell-style="bgTable" :row-class-name="tableRowClassName" :cell-style="tableCellStyle"
                       v-loading="loading3" element-loading-text="数据加载中..."  element-loading-background="rgba(0, 0, 0, 0.8)">
                 <el-table-column type="index" label="Test"  :show-overflow-tooltip="true" index="indexMethod" align="center"></el-table-column>
@@ -20,7 +20,7 @@
 
 
 
-        <div class="home-center">
+        <div class="home-center1">
             <div v-for="(item,index) in roundsData">
                 <div class="divtest"></div>
                 <p class="big-title">
@@ -196,7 +196,7 @@
         color: #82848a;
         margin-left: 27px;
     }
-    .home-center{
+    .home-center1{
         margin-top: 20px;
         margin-left: 30px;
         margin-right:30px;

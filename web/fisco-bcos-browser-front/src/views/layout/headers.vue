@@ -2,9 +2,9 @@
     <div>
         <div class="nav-header">
             <div class="container">
-                <div class="logo">
-                    <img style="width: 170px;" @click='link' src="../../assets/images/fisco-bcos-logo.png" class="image">
-                </div>
+<!--                <div class="logo">-->
+<!--                    <img style="width: 170px;" @click='link' src="../../assets/images/fisco-bcos-logo.png" class="image">-->
+<!--                </div>-->
                 <div class="nav-menu" style="float: left;">
                     <div class="nav-menu-item nav-item" style="display: inline-block;width: 160px;text-align:right">
                         <span>{{groupName}}</span>
@@ -20,9 +20,7 @@
                 </div>
 
                 <div class="nav-menu">
-                    <el-button type="primary" @click="startshell" class="header-button1">启动FISCO BCOS测试链</el-button>
-                    <el-button type="primary" @click="stopshell" class="header-button2">暂停FISCO BCOS测试链</el-button>
-                    <div class="nav-menu-item nav-item" @click="routerLink('home')">首页</div>
+                    <div class="nav-menu-item nav-item" @click="routerLink('groupConfig')">测试链配置</div>
                     <div class="nav-menu-item nav-item" v-for="item in menu" :key='item.title'>{{item.title}}
                         <i class="el-icon-caret-bottom icon-up"></i>
                         <i class="el-icon-caret-top icon-down"></i>

@@ -28,15 +28,15 @@ export default {
     ],
     START_LIST:[
         {
-            label: '群组配置',
+            label: '测试链配置',
             route: 'groupConfig',
-            description: '（群组ID需要和区块链群组ID保持一致。）',
+            description: '（测试链ID需要和区块链群组ID保持一致。）',
             class: 'bg-8693f3 margin-right-15 margin-bottom-15',
         },
         {
             label: '节点配置',
             route: 'nodeConfig',
-            description: '（添加群组所在的节点信息，用于区块链浏览器连接拉取相关展示信息。）',
+            description: '（添加测试链所在的节点信息，用于区块链浏览器连接拉取相关展示信息。）',
             class: 'bg-bc8dee margin-left-15 margin-bottom-15',
         },
         {
@@ -64,7 +64,7 @@ export default {
         },
         {
             label: '查看测试报告',
-            route: 'test',
+            route: 'testDetail',
             class: 'bg-89c3f8 margin-top-15  margin-left-15',
         }
     ],
@@ -77,12 +77,8 @@ export default {
     ],
     MENU_LIST: [
         {
-            title: '区块链配置',
+            title: '测试链管理',
             subMenu: [
-                {
-                    title: '群组配置',
-                    name: 'groupConfig',
-                },
                 {
                     title: '节点配置',
                     name: 'nodeConfig',
@@ -95,8 +91,12 @@ export default {
             ]
         },
         {
-            title: '区块链信息',
+            title: '信息查看',
             subMenu: [
+                {
+                    title: '实时信息概览',
+                    name: 'home',
+                },
                 {
                     title: '查看区块',
                     name: 'block',
@@ -105,26 +105,19 @@ export default {
                     title: '查看交易',
                     name: 'transaction',
                 },
+            ]
+        },
+        {
+            title: '区块链测试',
+            subMenu:[
                 {
-                    title: '查看测试报告',
-                    name: 'test',
+                    title: '性能测试配置',
+                    name: 'testConfig',
                 },
-                // {
-                //     title: '正在处理的交易',
-                //     name: 'pendingTransaction',
-                // },
-                // {
-                //     title: '统计指标',
-                //     name: 'singleStatistics',
-                // },
-                // {
-                //     title: '交易流',
-                //     name: 'transactionStatistics'
-                // },
-                // {
-                //     title: '共识流',
-                //     name: 'blockStatistics',
-                // }
+                {
+                    title: '性能测试结果',
+                    name: 'test',
+                }
             ]
         }
     ],
@@ -141,7 +134,7 @@ export default {
 
     DELETE_PROJECT_SUCCESS: '删除项目成功',
 
-    ADD_GROUP_SUCCESS: '新增群组成功',
+    ADD_GROUP_SUCCESS: '新增测试链成功',
 
     INTERVALTIME: 20000,
 

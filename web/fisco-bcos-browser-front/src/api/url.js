@@ -51,5 +51,11 @@ export default {
 
     GET_ABI: `${api}/contract/abi`,
 
-    GET_TEST_LIST: `${api}/test/testList`
+    GET_TEST_LIST: `${api}/test/testList`,
+
+    GET_JSON: `${api}/han/getJson`,
+
+    START_SHELL: `${api}/han/startShell`,
+
+    STOP_SHELL: `${api}/han/stopShell`
 }

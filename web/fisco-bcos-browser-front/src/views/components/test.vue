@@ -10,25 +10,15 @@
                 </div>
             </div>
             <div class="search-table">
-                <el-table :data="testList"  element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)">
-                    <el-table-column prop="testId" label="测试轮数" min-width="120px" align="center" :show-overflow-tooltip="true"></el-table-column>
-                    <el-table-column prop="testTime" label="测试时间" min-width="100px" :show-overflow-tooltip="true" align="center"></el-table-column>
+                <el-table :data="testList" element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)">
+                    <el-table-column prop="testId" label="测试轮数" min-width="100px"  align="center" :show-overflow-tooltip="true"></el-table-column>
+                    <el-table-column prop="testTime" label="测试时间" min-width="120px" :show-overflow-tooltip="true" align="center"></el-table-column>
+                    <el-table-column label="查看测试报告" min-width="150px"align="center">
+                        <template slot-scope="scope">
+                            <el-button type="primary" @click="linkPage('testDetail',chainType)">查看</el-button>
+                        </template>
+                    </el-table-column>
                 </el-table>
-<!--                <div class="search-pagation">-->
-<!--                    <div style="line-height: 40px;">-->
-<!--                        <span>查询结果 : </span>-->
-<!--                        <span>共计{{pagination.total}}条数据</span>-->
-<!--                    </div>-->
-<!--                    <el-pagination style="display: inline-block"-->
-<!--                                   layout="sizes,prev, pager, next"-->
-<!--                                   :total="pagination.total"-->
-<!--                                   @size-change="handleSizeChange"-->
-<!--                                   @current-change="handleCurrentChange"-->
-<!--                                   :current-page.sync="pagination.currentPage"-->
-<!--                                   :page-sizes="[10, 20, 30, 50]"-->
-<!--                                   :page-size="pagination.pageSize">-->
-<!--                    </el-pagination>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
@@ -36,8 +26,10 @@
 
 <script>
     import {getTestList} from "@/api/api";
-    import {MonthState, timeState} from "../../util/util";
+    import {goPage, MonthState, timeState} from "../../util/util";
     import date from "../../util/timechange";
+    import testConfig from "./testConfig";
+    import testDetail from "./testDetail";
     let minMonthData=null;
     let maxMonthData=null;
     let months=MonthState((new Date()).getTime())
@@ -58,6 +50,7 @@
                 loading:false,
                 blockNumber:null,
                 setIntervalTime:null,
+                chainType: this.$route.query.chainType || "01",
             }
         },
         mounted: function(){
@@ -89,7 +82,10 @@
             handleCurrentChange(val) {
                 this.pagination.currentPage = val;
                 this.searchTbBlockInfo();
-            }
+            },
+            linkPage: function (name,label,data) {
+                return goPage(name,label,data);
+            },
         },
     }
 </script>

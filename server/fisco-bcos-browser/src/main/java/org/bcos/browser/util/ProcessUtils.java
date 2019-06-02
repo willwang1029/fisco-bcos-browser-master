@@ -7,7 +7,7 @@ public class ProcessUtils {
 
     public static String start(String path) {
         try {
-            Process ps = Runtime.getRuntime().exec("./sh/" + path);
+            Process ps = Runtime.getRuntime().exec("/root/fisco/nodes/127.0.0.1/" + path);
             ps.waitFor();
 
             BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));

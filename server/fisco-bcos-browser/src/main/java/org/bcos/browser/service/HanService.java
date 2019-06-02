@@ -61,7 +61,18 @@ public class HanService {
     public BaseResponse startShell() {
         try {
             BaseResponse response = new BaseResponse(ConstantCode.SUCCESS);
-            response.setData(ProcessUtils.start("test.sh"));
+            response.setData(ProcessUtils.start("start_all.sh"));
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new BaseResponse(ConstantCode.SYSTEM_ERROR);
+        }
+    }
+
+    public BaseResponse stopShell(){
+        try {
+            BaseResponse response = new BaseResponse(ConstantCode.SUCCESS);
+            response.setData(ProcessUtils.start("stop_all.sh"));
             return response;
         } catch (Exception e) {
             e.printStackTrace();

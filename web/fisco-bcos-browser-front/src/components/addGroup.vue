@@ -1,17 +1,17 @@
 <template>
     <div class="group-dialog">
         <el-dialog
-            title="新增群组"
+            title="新增测试链"
             :visible.sync="groupVisible"
-            width="500px"
+            width="600px"
             :before-close="handleClose">
             <div class="node-model-conetnt" style="padding-left: 0">
-                <el-form :model="groupForm" :rules="rules" ref="groupForm" label-width="100px" class="demo-ruleForm">
-                    <el-form-item label="群组ID：" prop="id">
-                        <el-input v-model="groupForm.id"  placeholder="请输入真实的群组ID"></el-input>
+                <el-form :model="groupForm" :rules="rules" ref="groupForm" label-width="120px" class="demo-ruleForm">
+                    <el-form-item label="测试链ID：" prop="id">
+                        <el-input v-model="groupForm.id"  placeholder="请输入真实的测试链ID"></el-input>
                     </el-form-item>
-                    <el-form-item label="群组名称：" prop="name">
-                        <el-input v-model="groupForm.name" placeholder="请输入群组名称"></el-input>
+                    <el-form-item label="测试链名称：" prop="name">
+                        <el-input v-model="groupForm.name" placeholder="请输入测试链名称"></el-input>
                     </el-form-item>
                 </el-form>
                 <div class="group-label">
@@ -42,11 +42,11 @@ export default {
             },
             rules:{
                 name: [
-                    {required: true, message: '请输入群组名称', trigger: 'blur'},
+                    {required: true, message: '请输入测试链名称', trigger: 'blur'},
                     {min: 1,max:16, message: '长度不能超过16位', trigger: 'blur'},
                 ],
                 id: [
-                    {required: true, message: '请输入群组id', trigger: 'blur'},
+                    {required: true, message: '请输入测试链id', trigger: 'blur'},
                     {min: 1,max:16, message: '长度不能超过16位', trigger: 'blur'},
                     {pattern:/^[1-9]\d*$/,message: '格式不正确', trigger: 'blur'}
                 ] 
@@ -98,7 +98,7 @@ export default {
 }
 .group-label-title{
     display: inline-block;
-    width: 100px;
+    width: 120px;
     color: #fff;
     text-align: right;
     padding-right: 15px;
@@ -106,7 +106,7 @@ export default {
     box-sizing: border-box;
 }
 .group-label-input{
-    width: 200px;
+    width: 400px;
 }
 .group-dialog >>>.el-dialog__footer{
     background-color: #2a2c3b;

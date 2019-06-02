@@ -4,21 +4,30 @@
             <v-nav :hrTitle="btitle" :hrcontent="btitle"></v-nav>
              <div class="search-nav">
                  <div class="hashInput">
-                    <el-button type="primary" @click="add"><i class="el-icon-plus"></i>新增群组</el-button>
+                    <el-button type="primary" @click="add"><i class="el-icon-plus"></i>新增测试链</el-button>
                 </div>
              </div>
              <div class="search-table">
                  <el-table :data="grouplist" v-loading="loading"  element-loading-text="数据加载中..."
                           element-loading-background="rgba(0, 0, 0, 0.8)">
                     <el-table-column type="index" label="序号" align="center" min-width='60px'></el-table-column>
-                    <el-table-column prop="groupId" label="群组id" align="center"></el-table-column>
-                    <el-table-column prop="groupName" label="群组名称" align="center"></el-table-column>
-                    <el-table-column prop="groupDesc" label="群组描述" align="center"></el-table-column>
+                    <el-table-column prop="groupId" label="测试链id" align="center"></el-table-column>
+                    <el-table-column prop="groupName" label="测试链名称" align="center"></el-table-column>
+                    <el-table-column prop="groupDesc" label="测试链描述" align="center"></el-table-column>
                     <el-table-column label="操作">
                         <template slot-scope="scope">
                             <i class="el-icon-delete" style=" cursor:pointer" @click="deleteData(scope.row)"></i>
                         </template>
                     </el-table-column>
+                     <el-table-column>
+                         <el-button type="primary" @click="startchain">启动</el-button>
+                         <el-button type="primary" @click="stopchain">暂停</el-button>
+
+                     </el-table-column>
+                     <el-table-column>
+                         <el-button type="primary" @click="linkPage('nodeConfig',chainType)">节点配置</el-button>
+                         <el-button type="primary" @click="linkPage('contractConfig',chainType)">合约配置</el-button>
+                     </el-table-column>
                 </el-table>
              </div>
         </div>
@@ -27,12 +36,13 @@
 </template>
 <script>
 import nav from '@/components/content-nav'
-import { getGroupList,deleteGroup } from "@/api/api"
+import { getGroupList,deleteGroup,startShell,stopShell } from "@/api/api"
 import addGroup from "@/components/addGroup"
 import {message} from '@/util/util'
 import constant from '@/util/constant'
 import errorcode from "@/util/errorCode"
 import Bus from "@/bus"
+import {goPage} from "../../util/util";
 
 export default {
     name: "group",
@@ -42,10 +52,11 @@ export default {
     },
     data: function(){
         return {
-            btitle: "群组配置",
+            btitle: "测试链配置",
             grouplist: [],
             addGroupShow: false,
             loading: false,
+            chainType: this.$route.query.chainType || "01",
         }
     },
     mounted: function(){
@@ -95,7 +106,7 @@ export default {
             this.addGroups();
         },
         deleteData: function(val){
-            this.$confirm('此操作不可恢复，请确认！','删除群组',{center:true}).then(_ => {
+            this.$confirm('此操作不可恢复，请确认！','删除测试链',{center:true}).then(_ => {
                     this.deleteItem(val);
                 }).catch(_ => {
             });
@@ -113,6 +124,19 @@ export default {
                 }
             }).catch(err => {
                  message(constant.ERROR,'error');
+            })
+        },
+        linkPage: function (name,label,data) {
+            return goPage(name,label,data);
+        },
+        startchain:function () {
+            startShell().catch(err => {
+                message(constant.ERROR,'error');
+            })
+        },
+        stopchain:function () {
+            stopShell().catch(err => {
+                message(constant.ERROR,'error');
             })
         }
     }

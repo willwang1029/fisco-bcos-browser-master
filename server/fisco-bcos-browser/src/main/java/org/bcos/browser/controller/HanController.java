@@ -50,4 +50,10 @@ public class HanController {
     public BaseResponse startShell() {
         return hservice.startShell();
     }
+
+    @GetMapping("/stopShell")
+    public BaseResponse stopShell(){
+        return hservice.stopShell();
+    }
+
 }

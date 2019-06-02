@@ -11,5 +11,5 @@ public interface UserMapper {
 
     int getUser(@Param(value = "userName")String userName, @Param(value = "email")String email);
 
-    boolean verityUser(@Param(value = "userName")String userName, @Param(value = "passWord")String passWord);
+    int verityUser(@Param(value = "userName")String userName, @Param(value = "passWord")String passWord);
 }

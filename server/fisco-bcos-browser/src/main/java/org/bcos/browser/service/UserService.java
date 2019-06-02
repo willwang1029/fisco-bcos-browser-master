@@ -16,10 +16,7 @@ public class UserService {
     UserMapper userMapper;
 
     public BaseResponse addUser(String userName, String email, String password) {
-        System.out.println(userName);
-
         int count = userMapper.getUser(userName, email);
-        System.out.println(count);
         if(count > 0) { return new BaseResponse(ConstantCode.SYSTEM_ERROR); }
         else {
             User user = new User();
@@ -29,5 +26,11 @@ public class UserService {
             userMapper.add(user);
             return new BaseResponse(ConstantCode.SUCCESS);
         }
+    }
+
+    public BaseResponse verityUser(String userName, String passWord) {
+        int count = userMapper.verityUser(userName, passWord);
+        if(count != 1) { return new BaseResponse(ConstantCode.SYSTEM_ERROR); }
+        else { return new BaseResponse(ConstantCode.SUCCESS); }
     }
 }

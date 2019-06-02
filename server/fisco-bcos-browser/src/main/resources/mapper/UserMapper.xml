@@ -13,4 +13,10 @@
         FROM user
         WHERE user_name = #{userName} OR email = #{email}
     </select>
+
+    <select id="verityUser" resultType="int">
+        SELECT count(1)
+        FROM user
+        WHERE user_name = #{userName} AND pass_word = #{passWord}
+    </select>
 </mapper>

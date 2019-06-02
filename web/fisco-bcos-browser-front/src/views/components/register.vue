@@ -20,21 +20,27 @@
                               auto-complete="on"></el-input>
                 </el-form-item>
 
-                <el-button :loading="loading" type="primary" style="width: 100%;margin-top: 20px;">
+                <el-button :loading="loading" type="primary" style="width: 100%;margin-top: 20px;" @click="submituser('registerForm')">
                     注册
                 </el-button>
 
                 <el-row style="margin-top: 20px;margin-left: 50px">
-                    <el-button type="text" style="margin-left: 80px">去登陆</el-button>
+                    <el-button type="text" style="margin-left: 80px" @click="linkPage('index',chainType)">去登陆</el-button>
                 </el-row>
             </el-form>
             <div class="shadow-bottom shadow-1"></div>
             <div class="shadow-bottom shadow-2"></div>
         </div>
     </div>
+
 </template>
 
 <script>
+    import {goPage} from "../../util/util";
+    import {adduser} from "../../api/api";
+    import constant from "../../util/constant";
+    import errorcode from "@/util/errorCode"
+
     export default {
         name: "register",
         data:function () {
@@ -54,6 +60,19 @@
                     callback()
                 }
             }
+            const validateEmail = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请正确填写邮箱'));
+                } else {
+                    if (value !== '') {
+                        var reg=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                        if(!reg.test(value)){
+                            callback(new Error('请输入有效的邮箱'));
+                        }
+                    }
+                    callback();
+                }
+            }
             return{
                 loading:false,
                 companyName:'fisco-bcos网站',
@@ -64,11 +83,13 @@
                 },
                 registerRules:{
                     username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-                    password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+                    password: [{ required: true, trigger: 'blur', validator: validatePassword }],
+                    email:    [{ required:true,  trigger: 'blur', validator: validateEmail}]
                 },
                 passwordType:'password',
                 showDialog:false,
-                redirect:undefined
+                redirect:undefined,
+                chainType: this.$route.query.chainType || "01",
             }
         },
         methods:{
@@ -78,6 +99,27 @@
                 } else {
                     this.passwordType = 'password'
                 }
+            },
+            linkPage: function (name,label,data) {
+                return goPage(name,label,data);
+            },
+            submituser: function (formName) {
+                let data = {
+                    userName: this.registerForm.username,
+                    email: this.registerForm.email,
+                    passWord: this.registerForm.password,
+                }
+                adduser(data).then(res => {
+                    if(res.data.code === 0){
+                        this.$emit('success');
+                        this.handleClose();
+                    }else{
+
+                    }
+                }).catch(err => {
+                    message('用户名或邮箱已存在','error');
+                })
+                goPage('index',this.chainType)
             },
         }
     }

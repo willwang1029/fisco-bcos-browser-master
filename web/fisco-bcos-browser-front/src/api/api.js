@@ -237,4 +237,11 @@ export function stopShell(data) {
     })
 }
 
+export function adduser(data){
+    return post({
+        url: `${url.ADD_USER}`,
+        method: 'post',
+        data: data
+    })
+}
 

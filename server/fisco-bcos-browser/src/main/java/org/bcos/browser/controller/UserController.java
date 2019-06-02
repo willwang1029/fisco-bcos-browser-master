@@ -2,12 +2,16 @@ package org.bcos.browser.controller;
 
 import org.bcos.browser.entity.base.BaseResponse;
 import org.bcos.browser.service.UserService;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "user")
@@ -17,13 +21,15 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/add")
-    public BaseResponse addUser(String userName, String email, String passWord) {
-        return userService.addUser(userName, email, passWord);
+    public BaseResponse addUser(@Valid @RequestBody String str) throws JSONException {
+        JSONObject object = new JSONObject(str);
+        return userService.addUser(object.getString("userName"), object.getString("email"), object.getString("passWord"));
     }
 
     @PostMapping("/verity")
-    public BaseResponse verityUser(String userName, String passWord, HttpSession session) {
-        session.setAttribute("userName", userName);
-        return userService.verityUser(userName, passWord);
+    public BaseResponse verityUser(@Valid @RequestBody String str, HttpSession session) throws JSONException {
+        JSONObject object = new JSONObject(str);
+        session.setAttribute("userName", object.getString("userName"));
+        return userService.verityUser(object.getString("userName"), object.getString("passWord"));
     }
 }

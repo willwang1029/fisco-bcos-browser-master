@@ -136,6 +136,8 @@ export default {
 
     ADD_GROUP_SUCCESS: '新增测试链成功',
 
+    ADD_USER_SUCCESS: '注册成功',
+
     INTERVALTIME: 20000,
 
     CHAIN_OPTION: [

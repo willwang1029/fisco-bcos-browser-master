@@ -57,5 +57,7 @@ export default {
 
     START_SHELL: `${api}/han/startShell`,
 
-    STOP_SHELL: `${api}/han/stopShell`
+    STOP_SHELL: `${api}/han/stopShell`,
+
+    ADD_USER: `${api}/user/add`,
 }

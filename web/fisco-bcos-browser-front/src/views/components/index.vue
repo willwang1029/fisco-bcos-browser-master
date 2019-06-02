@@ -21,8 +21,8 @@
                 </el-button>
 
                 <el-row style="margin-top: 20px;margin-left: 50px">
-                    <el-button type="text">忘记密码</el-button>
-                    <el-button type="text" style="margin-left: 80px">注册账号</el-button>
+<!--                    <el-button type="text">忘记密码</el-button>-->
+                    <el-button type="text" style="margin-left: 80px" @click="linkPage('register',chainType)">注册账号</el-button>
                 </el-row>
             </el-form>
             <div class="shadow-bottom shadow-1"></div>
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+    import {goPage} from "../../util/util";
+
     export default {
         name: "index",
         data:function () {
@@ -64,7 +66,8 @@
                 },
                 passwordType:'password',
                 showDialog:false,
-                redirect:undefined
+                redirect:undefined,
+                chainType: this.$route.query.chainType || "01",
             }
         },
         methods:{
@@ -74,6 +77,9 @@
                 } else {
                     this.passwordType = 'password'
                 }
+            },
+            linkPage: function (name,label,data) {
+                return goPage(name,label,data);
             },
             handleLogin() {
                 this.$refs.loginForm.validate(valid => {

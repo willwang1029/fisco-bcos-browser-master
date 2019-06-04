@@ -4,9 +4,9 @@ import org.bcos.browser.entity.base.BaseResponse;
 import org.bcos.browser.service.HanService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "han")
@@ -54,6 +54,11 @@ public class HanController {
     @GetMapping("/stopShell")
     public BaseResponse stopShell(){
         return hservice.stopShell();
+    }
+
+    @PostMapping("/startTest")
+    public BaseResponse startTest(String str) {
+        return hservice.startTest(str);
     }
 
 }

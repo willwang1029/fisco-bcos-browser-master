@@ -245,3 +245,11 @@ export function adduser(data){
     })
 }
 
+export function verityuser(data) {
+    return post({
+        url: `${url.VERITY_USER}`,
+        method: 'post',
+        data: data
+    })
+}
+

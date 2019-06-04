@@ -16,7 +16,7 @@
                     </el-input>
                 </el-form-item>
 
-                <el-button :loading="loading" type="primary" style="width: 100%;margin-top: 20px;" @click.native.prevent="handleLogin">
+                <el-button :loading="loading" type="primary" style="width: 100%;margin-top: 20px;" @click="handleLogin('loginForm')">
                     登陆
                 </el-button>
 
@@ -33,6 +33,7 @@
 
 <script>
     import {goPage} from "../../util/util";
+    import {verityuser} from "../../api/api";
 
     export default {
         name: "index",
@@ -81,29 +82,32 @@
             linkPage: function (name,label,data) {
                 return goPage(name,label,data);
             },
-            handleLogin() {
-                this.$refs.loginForm.validate(valid => {
-                    if (valid) {
-                        this.loading = true
-                        this.$store
-                            .dispatch('LoginByUsername', this.loginForm)
-                            .then(() => {
-                                this.loading = false
-                                this.$router.replace({ path: this.redirect || '/' })
-                            }, (res) => {
-                                let errorMsg = res && res.msg || '登录失败'
-                                this.loading = false
-                                this.$message.error(errorMsg)
-                            })
-                            .catch(() => {
-                                this.loading = false
-                            })
-                    } else {
-                        console.log('error submit!!')
-                        return false
+            handleLogin: function (formName) {
+                let data={
+                    userName:this.loginForm.username,
+                    passWord:this.loginForm.password,
+                }
+                verityuser(data).then(res => {
+                    if(res.data.code === 0){
+                        this.$message({
+                            type: 'success',
+                            message: '登陆成功!'
+                        });
+                        goPage('home',this.chainType)
                     }
+                    else {
+                        this.$message({
+                            type: 'error',
+                            message: '用户名或密码错误!'
+                        });
+                    }
+                }).catch(err => {
+                    this.$message({
+                        type: 'error',
+                        message: '服务器错误!'
+                    });
                 })
-            },
+            }
         }
     }
 </script>

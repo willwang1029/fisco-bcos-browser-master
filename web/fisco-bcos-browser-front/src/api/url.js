@@ -60,4 +60,6 @@ export default {
     STOP_SHELL: `${api}/han/stopShell`,
 
     ADD_USER: `${api}/user/add`,
+
+    VERITY_USER: `${api}/user/verity`,
 }

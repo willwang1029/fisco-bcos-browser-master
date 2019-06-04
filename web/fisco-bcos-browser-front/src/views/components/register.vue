@@ -111,15 +111,24 @@
                 }
                 adduser(data).then(res => {
                     if(res.data.code === 0){
-                        this.$emit('success');
-                        this.handleClose();
-                    }else{
-
+                        this.$message({
+                            type: 'success',
+                            message: '注册成功!'
+                        });
+                        goPage('index',this.chainType)
+                    }
+                    else {
+                        this.$message({
+                            type: 'error',
+                            message: '用户名或邮箱已存在!'
+                        });
                     }
                 }).catch(err => {
-                    message('用户名或邮箱已存在','error');
+                    this.$message({
+                        type: 'error',
+                        message: '服务器错误!'
+                    });
                 })
-                goPage('index',this.chainType)
             },
         }
     }

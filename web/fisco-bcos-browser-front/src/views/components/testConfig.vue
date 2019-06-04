@@ -28,7 +28,10 @@
                             </el-input>
                         </el-col>
                         <el-col :span="4" style="margin-left: 80px">
-                            <el-button type="primary"><i class="el-icon-plus"></i>上传脚本</el-button>
+                            <div class="hashInput">
+                                <el-button type="primary"><i class="el-icon-plus"></i>上传脚本</el-button>
+                                <input type="file" ref='file' id="file" class="inputFiles" multiple="multiple" accept=".json"  name="chaincodes" @change="upLoadJson(index,$event)"/>
+                            </div>
                         </el-col>
                         <el-col :span="4">
                             <el-button type="primary" @click="removeConfig(index)"><i class="el-icon-delete"></i>删除本轮</el-button>
@@ -59,6 +62,7 @@
                 obj.val = "";
                 obj.time="";
                 obj.speed="";
+                obj.json = {};
                 this.inputs.push(obj);
             },
             sub (){
@@ -66,8 +70,26 @@
             },
             removeConfig(index){
                 this.inputs.splice(index,1)
-            }
-
+            },
+            upLoadJson:function (index,e) {
+                if(e.target.files.length == 1){
+                    let num =0;
+                    if(num == 0){
+                        this.upLoad(index,e)
+                    }
+                }
+            },
+            upLoad: function(index,e) {
+                var that=this
+                for(let i = 0; i < e.target.files.length; i++){
+                    let file = e.target.files[i];
+                    let reader = new FileReader(); //add a FileReader
+                    reader.readAsText(file, "UTF-8"); //read file
+                    reader.onload = function(evt) {
+                        that.inputs[index].json = evt.target.result; // read file content'
+                    };
+                }
+            },
         }
     }
 </script>
@@ -111,5 +133,17 @@
         border-radius: 4px;
         min-height: 36px;
     }
+    .hashInput>.label{
+        display: inline-block;
+        width: 80px;
+    }
+    .inputFiles{
+        position: absolute;
+        opacity: 0;
+        left: 820px;
+        top: 0;
+        width: 100px;
+        height: 50px;
 
+    }
 </style>

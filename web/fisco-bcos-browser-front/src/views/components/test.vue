@@ -51,20 +51,26 @@
                 blockNumber:null,
                 setIntervalTime:null,
                 chainType: this.$route.query.chainType || "01",
+                ruleForm: {
+                    userName: '', //用户名
+                    password: ''  //密码
+                },
             }
         },
         mounted: function(){
+            this.getCookie();
             this.Test("test");
+
         },
         beforeDestroy: function () {
             window.clearInterval(this.setIntervalTime);
         },
         methods:{
             Test:function (val) {
-                let result="";
+                let result={
+                    username:this.ruleForm.userName
+                }
                 getTestList(result).then(res => {
-                    debugger
-                    console.log(res.data.data);
                     let timeresult = res.data.data
                     timeresult.forEach(item => {
                         item.testTime = date(item.testTime,'yyyy-MM-dd HH:mm:ss')
@@ -73,6 +79,19 @@
                 }).catch(err=>{
                     message(constant.ERROR,'error');
                 })
+            },
+            getCookie:function(){
+                if (document.cookie.length>0){
+                    var arr=document.cookie.split(';');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2=arr[i].split('=');
+                        if(arr2[0]=='userName'){
+                            this.ruleForm.userName=arr2[1];
+                        }else if(arr2[0]=='userPwd'){
+                            this.ruleForm.password=arr2[1];
+                        }
+                    }
+                }
             },
             handleSizeChange(val) {
                 this.pagination.pageSize = val;

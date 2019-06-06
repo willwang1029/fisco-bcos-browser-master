@@ -41,7 +41,7 @@ const routes = [
         path: '/',
         name: 'main',
         component: main,
-        redirect: '/home',
+        redirect: '/index',
         children:[
             {
                 path: '/home',
@@ -144,6 +144,14 @@ const routes = [
                 },
                 component:resolve => require(['@/views/components/testConfig'],resolve),
             },
+            {
+                path:'/algorithmConfig',
+                name:'algorithmConfig',
+                meta:{
+                    requireAuth:true,
+                },
+                component:resolve => require(['@/views/components/algorithmConfig'],resolve),
+            }
         ]
         }
     ]

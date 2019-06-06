@@ -18,9 +18,20 @@
                         <i v-if="groupList.length" class="el-icon-caret-top icon-down icon"></i>
                     </div>
                 </div>
+                <div class="nav-menu" style="font-size: 20px;margin-left: 20px">
 
+                    <el-dropdown>
+                        <span class="el-dropdown-link" style="font-size: 20px;font-family: 'Arial Unicode MS';color: #f0f2f5">
+                             {{ruleForm.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item @click.native="linkPage('test',chainType)">我的测试</el-dropdown-item>
+                            <el-dropdown-item @click.native="clearCookie">退出登录</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+
+                </div>
                 <div class="nav-menu">
-                    <div class="nav-menu-item nav-item" @click="routerLink('groupConfig')">测试链配置</div>
                     <div class="nav-menu-item nav-item" v-for="item in menu" :key='item.title'>{{item.title}}
                         <i class="el-icon-caret-bottom icon-up"></i>
                         <i class="el-icon-caret-top icon-down"></i>
@@ -53,16 +64,22 @@ export default {
             groupId: "",
             active: 0,
             chainType: this.$route.query.chainType || "01",
+            ruleForm: {
+                userName: '', //用户名
+                password: ''  //密码
+            },
         };
     },
-      mounted: function () {
-          this.$nextTick(function () {
-                this.getGroupData();
-          })
-          Bus.$on("change",data => {
-              this.getGroupData();
-          })
-      },
+    mounted: function () {
+        this.$nextTick(function () {
+            this.getGroupData();
+            this.getCookie();
+        })
+        Bus.$on("change",data => {
+            this.getGroupData();
+            this.getCookie();
+        })
+    },
     methods: {
         // get groups
         getGroupData: function() {
@@ -76,6 +93,7 @@ export default {
                 });
             }
         },
+
         //Switching group
         checkGroup: function(val) {
             this.groupName = val.groupName;
@@ -111,6 +129,29 @@ export default {
         stopshell:function () {
             let result="";
             stopShell(result);
+        },
+        getCookie:function(){
+            if (document.cookie.length>0){
+                var arr=document.cookie.split(';');
+                for(var i=0;i<arr.length;i++){
+                    var arr2=arr[i].split('=');
+                    if(arr2[0]=='userName'){
+                        this.ruleForm.userName=arr2[1];
+                    }else if(arr2[0]=='userPwd'){
+                        this.ruleForm.password=arr2[1];
+                    }
+                }
+            }
+        },
+        clearCookie:function () {
+            this.setCookie("","",-1);//修改2值都为空，天数为负1天就好了
+            this.linkPage('index',this.chainType)
+        },
+        setCookie(c_name,c_pwd,exdays){
+            let exdate=new Date();
+            exdate.setTime(exdate.getTime()+24*60*60*1000*exdays);
+            window.document.cookie="userName"+"="+c_name+";path=/;expires="+exdate.toUTCString();
+            window.document.cookie="userPwd"+"="+c_pwd+";path=/;expires="+exdate.toUTCString();
         }
     }
 };

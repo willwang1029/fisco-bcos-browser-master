@@ -77,6 +77,19 @@ export default {
     ],
     MENU_LIST: [
         {
+            title:'初始化环境',
+            subMenu:[
+                {
+                    title: '节点部署',
+                    name: 'algorithmConfig',
+                },
+                {
+                    title: '测试链配置',
+                    name: 'groupConfig',
+                }
+            ]
+        },
+        {
             title: '测试链管理',
             subMenu: [
                 {

@@ -115,6 +115,7 @@
                             type: 'success',
                             message: '注册成功!'
                         });
+
                         goPage('index',this.chainType)
                     }
                     else {
@@ -130,6 +131,7 @@
                     });
                 })
             },
+
         }
     }
 </script>

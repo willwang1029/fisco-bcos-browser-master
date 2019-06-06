@@ -15,8 +15,8 @@ public class TestController extends BaseController {
     TestService testService;
 
     @GetMapping("/testList")
-    public BaseResponse getTestList(){
-        BaseResponse response=testService.getTestList();
+    public BaseResponse getTestList(String username){
+        BaseResponse response=testService.getTestList(username);
         return response;
     }
 }

@@ -16,9 +16,9 @@ public class TestService {
     @Autowired
     TestMapper testMapper;
 
-    public BaseResponse getTestList(){
+    public BaseResponse getTestList(String username){
         BaseResponse response = new BaseResponse(ConstantCode.SUCCESS);
-        List<Test> list = testMapper.getTestList();
+        List<Test> list = testMapper.getTestList(username);
         response.setData(list);
         return response;
     }

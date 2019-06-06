@@ -69,6 +69,10 @@
                 showDialog:false,
                 redirect:undefined,
                 chainType: this.$route.query.chainType || "01",
+                ruleForm: {
+                    userName: '', //用户名
+                    password: ''  //密码
+                },
             }
         },
         methods:{
@@ -77,6 +81,19 @@
                     this.passwordType = ''
                 } else {
                     this.passwordType = 'password'
+                }
+            },
+            getCookie:function(){
+                if (document.cookie.length>0){
+                    var arr=document.cookie.split(';');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2=arr[i].split('=');
+                        if(arr2[0]=='userName'){
+                            this.ruleForm.userName=arr2[1];
+                        }else if(arr2[0]=='userPwd'){
+                            this.ruleForm.password=arr2[1];
+                        }
+                    }
                 }
             },
             linkPage: function (name,label,data) {
@@ -93,6 +110,7 @@
                             type: 'success',
                             message: '登陆成功!'
                         });
+                        this.setCookie(data.userName,data.passWord,1);
                         goPage('home',this.chainType)
                     }
                     else {
@@ -107,6 +125,12 @@
                         message: '服务器错误!'
                     });
                 })
+            },
+            setCookie(c_name,c_pwd,exdays){
+                let exdate=new Date();
+                exdate.setTime(exdate.getTime()+24*60*60*1000*exdays);
+                window.document.cookie="userName"+"="+c_name+";path=/;expires="+exdate.toUTCString();
+                window.document.cookie="userPwd"+"="+c_pwd+";path=/;expires="+exdate.toUTCString();
             }
         }
     }

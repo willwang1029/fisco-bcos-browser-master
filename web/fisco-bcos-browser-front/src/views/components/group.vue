@@ -19,14 +19,12 @@
                             <i class="el-icon-delete" style=" cursor:pointer" @click="deleteData(scope.row)"></i>
                         </template>
                     </el-table-column>
-                     <el-table-column>
+                     <el-table-column min-width="200px">
                          <el-button type="primary" @click="startchain">启动</el-button>
                          <el-button type="primary" @click="stopchain">暂停</el-button>
-
-                     </el-table-column>
-                     <el-table-column>
                          <el-button type="primary" @click="linkPage('nodeConfig',chainType)">节点配置</el-button>
                          <el-button type="primary" @click="linkPage('contractConfig',chainType)">合约配置</el-button>
+                         <el-button type="primary" @click="linkPage('testConfig',chainType)">测试配置</el-button>
                      </el-table-column>
                 </el-table>
              </div>

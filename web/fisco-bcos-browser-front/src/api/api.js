@@ -206,10 +206,10 @@ export function getAbi(data){
 
 //getTestList
 export function getTestList(data){
-    return post({
+    return get({
         url: `${url.GET_TEST_LIST}`,
         method: 'get',
-        data: data
+        params: data
     })
 }
 

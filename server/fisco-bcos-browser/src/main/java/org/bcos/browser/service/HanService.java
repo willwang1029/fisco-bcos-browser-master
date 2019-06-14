@@ -19,9 +19,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class HanService {
@@ -135,10 +133,9 @@ public class HanService {
         }
     }
 
-    public boolean config2() {
-        Writer writer;
+    public boolean config2(List<String[]> list) {
         try {
-            Map m1, test, monitor;
+            Map m1, test;
             Yaml yaml = new Yaml();
             File file = new File("./data/config2.yaml");
 
@@ -146,9 +143,28 @@ public class HanService {
             m1 = yaml.load(new FileInputStream(file));
             //通过map我们取值就可以了.
             test = (Map) m1.get("test");
-            monitor = (Map) m1.get("monitor");
-            test.put("name", "wangyue");
+            List<Map> rounds = new ArrayList<>();
+            for(String[] data: list) {
+                Map map = new LinkedHashMap();
+                map.put("label", data[0]);   //名称
 
+                int[] txDuration = new int[1];
+                txDuration[0] = Integer.parseInt(data[1]);         // 间隔
+                map.put("txDuration", txDuration);
+
+                Map rateControl = new LinkedHashMap();
+                rateControl.put("type", "fixed-rate");
+                com.alibaba.fastjson.JSONObject opts = new com.alibaba.fastjson.JSONObject();
+                opts.put("tps", Integer.parseInt(data[2]));       //  持续时间
+                rateControl.put("opts", opts);
+                List<Map> rate = new ArrayList<>();
+                rate.add(rateControl);
+                map.put("rateControl", rate);
+
+                map.put("callback", data[3]);   //路径
+                rounds.add(map);
+            }
+            test.put("rounds", rounds);
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(yaml.dump(m1));
             fileWriter.flush();
@@ -166,7 +182,12 @@ public class HanService {
     }
 
     public BaseResponse config() {
-        if(config2()) { return new BaseResponse(ConstantCode.SUCCESS); }
+        List<String[]> list = new ArrayList<>();
+        String[] data1 = new String[]{"test1", "10", "100", "127.0.0.1"};
+        list.add(data1);
+        list.add(data1);
+        list.add(data1);
+        if(config2(list)) { return new BaseResponse(ConstantCode.SUCCESS); }
         else { return new BaseResponse(ConstantCode.SYSTEM_ERROR); }
     }
 

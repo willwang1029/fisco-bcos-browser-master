@@ -2,11 +2,11 @@ package org.bcos.browser.controller;
 
 import org.bcos.browser.entity.base.BaseResponse;
 import org.bcos.browser.service.HanService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+import java.io.File;
 
 @RestController
 @RequestMapping(value = "han")
@@ -64,7 +64,21 @@ public class HanController {
     @GetMapping("/jsonSave")
     public BaseResponse jsonSave(String userName) { return hservice.jsonSave(userName); }
 
-
     @GetMapping("/config")
     public BaseResponse config() { return hservice.config(); }
+
+    @PostMapping("/upload")
+    public void uploadExam(@RequestParam("file") MultipartFile file, String file_name, String label, String duration,
+                           String tps) {
+        try {
+            String url = "./data/" + file_name;
+            File dest = new File(url);
+            if(!dest.getParentFile().exists()) { dest.getParentFile().mkdirs(); }
+            if(!file.isEmpty()) { file.transferTo(dest); }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+
+        }
+    }
 }

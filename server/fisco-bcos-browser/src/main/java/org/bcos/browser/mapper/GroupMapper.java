@@ -23,6 +23,10 @@ public interface GroupMapper {
     void createTbContract(@Param(value = "tableName")String tableName);
     
     void createTbFunction(@Param(value = "tableName")String tableName);
+
+
+
+    void createTbTest(@Param(value = "tableName")String tableName);
     
     void dropTableByName(@Param(value = "tableName")String tableName);
     

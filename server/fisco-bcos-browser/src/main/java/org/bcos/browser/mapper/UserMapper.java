@@ -12,4 +12,10 @@ public interface UserMapper {
     int getUser(@Param(value = "userName")String userName, @Param(value = "email")String email);
 
     int verityUser(@Param(value = "userName")String userName, @Param(value = "passWord")String passWord);
+
+    User getUserInfo(@Param(value = "userName")String userName);
+
+    void modifyUser(@Param(value = "userName")String userName,@Param(value = "passWord")String passWord);
+
+    void createTbUser(@Param(value = "tableName")String tableName);
 }

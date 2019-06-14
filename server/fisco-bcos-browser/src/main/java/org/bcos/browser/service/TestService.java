@@ -23,4 +23,10 @@ public class TestService {
         return response;
     }
 
+    public BaseResponse getTestResult(int testId){
+        BaseResponse response = new BaseResponse(ConstantCode.SUCCESS);
+        Test testresult=testMapper.getTestResult(testId);
+        response.setData(testresult);
+        return response;
+    }
 }

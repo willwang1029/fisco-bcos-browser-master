@@ -8,4 +8,5 @@ public class Test {
     private int testId;
     private Timestamp testTime;
     private String username;
+    private String testResult;
 }

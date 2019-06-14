@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.bcos.browser.mapper.UserMapper">
-    <insert id="add" useGeneratedKeys="true"
-            parameterType="org.bcos.browser.entity.dto.User">
+    <insert id="add" useGeneratedKeys="true" parameterType="org.bcos.browser.entity.dto.User">
         INSERT INTO user(user_name, email, pass_word)
         VALUES(#{userName},#{email},#{passWord})
     </insert>
@@ -19,4 +18,27 @@
         FROM user
         WHERE user_name = #{userName} AND pass_word = #{passWord}
     </select>
+
+    <select id="getUserInfo" resultType="org.bcos.browser.entity.dto.User">
+        SELECT user_name as userName,
+               email as email,
+               pass_word as passWord
+        FROM user
+        WHERE user_name=#{userName}
+    </select>
+
+    <select id="modifyUser">
+        UPDATE user
+        SET pass_word=#{passWord}
+        WHERE user_name=#{userName}
+    </select>
+
+    <update id="createTbUser">
+        CREATE TABLE IF NOT EXISTS ${tableName} (
+            user_name varchar(255) COMMENT '用户名',
+            email varchar(255) COMMENT '邮箱',
+            pass_word varchar(255) COMMENT '密码',
+            PRIMARY KEY (user_name)
+            ) COMMENT='用户信息表' ENGINE=InnoDB DEFAULT CHARSET=utf8
+    </update>
 </mapper>

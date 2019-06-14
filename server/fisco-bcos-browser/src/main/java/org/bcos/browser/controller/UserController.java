@@ -39,4 +39,15 @@ public class UserController {
         } else { return new BaseResponse(ConstantCode.SYSTEM_ERROR); }
     }
 
+    @GetMapping("/getUserInfo")
+    public BaseResponse getUserInfo(String userName){
+        BaseResponse response=userService.getUserInfo(userName);
+        return response;
+    }
+
+    @GetMapping("/modifyUser")
+    public BaseResponse modifyUser(String userName, String passWord){
+        BaseResponse response=userService.modifyUser(userName,passWord);
+        return response;
+    }
 }

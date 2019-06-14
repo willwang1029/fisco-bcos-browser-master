@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface TestMapper {
     List<Test> getTestList(@Param(value = "username")String username);
+
+    Test getTestResult(@Param(value = "testId")int testId);
 }

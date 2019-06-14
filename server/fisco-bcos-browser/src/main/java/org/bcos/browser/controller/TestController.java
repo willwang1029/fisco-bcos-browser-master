@@ -19,4 +19,10 @@ public class TestController extends BaseController {
         BaseResponse response=testService.getTestList(username);
         return response;
     }
+
+    @GetMapping("/testResult")
+    public BaseResponse getTestResult(int testId){
+        BaseResponse response=testService.getTestResult(testId);
+        return response;
+    }
 }

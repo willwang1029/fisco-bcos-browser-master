@@ -67,6 +67,8 @@ public class GroupService {
         tableName = Constants.PREFIX_TB_TRANSACTION + groupId;
         groupMapper.createTbTransaction(tableName);
 
+        groupMapper.createTbTest("tb_test");
+
         label:
         for(Group loop : list){
             List<Node> nodes = nodeMapper.getAllNode(loop.getGroupId());

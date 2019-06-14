@@ -8,4 +8,13 @@
         FROM tb_test
         WHERE user_name=#{username}
     </select>
+
+    <select id="getTestResult" resultType="org.bcos.browser.entity.dto.Test">
+        SELECT test_id as testId,
+               user_name as username,
+               test_result as testResult,
+               test_time as testTime
+        FROM tb_test
+        WHERE test_id=#{testId}
+    </select>
 </mapper>

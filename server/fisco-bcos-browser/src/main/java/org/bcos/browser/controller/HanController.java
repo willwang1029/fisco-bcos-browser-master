@@ -61,4 +61,7 @@ public class HanController {
         return hservice.startTest(str);
     }
 
+    @GetMapping("/jsonSave")
+    public BaseResponse jsonSave(String userName) { return hservice.jsonSave(userName); }
+
 }

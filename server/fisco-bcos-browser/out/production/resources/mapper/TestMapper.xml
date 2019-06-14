@@ -3,7 +3,33 @@
 <mapper namespace="org.bcos.browser.mapper.TestMapper">
     <select id="getTestList" resultType="org.bcos.browser.entity.dto.Test">
         SELECT test_id as testId,
+               user_name as username,
                test_time as testTime
         FROM tb_test
+        WHERE user_name=#{username}
     </select>
+
+    <select id="getTestResult" resultType="org.bcos.browser.entity.dto.Test">
+        SELECT test_id as testId,
+               user_name as username,
+               test_result as testResult,
+               test_time as testTime
+        FROM tb_test
+        WHERE test_id=#{testId}
+    </select>
+
+    <insert id="saveTestResult" useGeneratedKeys="true" parameterType="org.bcos.browser.entity.dto.Test">
+        INSERT INTO test(test_time, user_name, test_result)
+        VALUES(#{testTime}, #{userName}, #{testResult})
+    </insert>
+
+    <update id="createTest">
+        CREATE TABLE IF NOT EXISTS test (
+            test_id int(11) NOT NULL AUTO_INCREMENT COMMENT '报告id',
+            user_name varchar(255) COMMENT '用户名',
+            test_result varchar(20000) COMMENT '测试结果',
+            test_time timestamp(3) COMMENT '测试时间',
+            PRIMARY KEY (test_id)
+        ) COMMENT='测试结果表' AUTO_INCREMENT=300001 ENGINE=InnoDB DEFAULT CHARSET=utf8
+    </update>
 </mapper>

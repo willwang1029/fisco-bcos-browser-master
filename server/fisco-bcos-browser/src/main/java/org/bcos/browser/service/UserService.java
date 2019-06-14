@@ -24,6 +24,7 @@ public class UserService {
             user.setUserName(userName);
             user.setEmail(email);
             user.setPassWord(password);
+            userMapper.createUser();
             userMapper.add(user);
             return new BaseResponse(ConstantCode.SUCCESS);
         }

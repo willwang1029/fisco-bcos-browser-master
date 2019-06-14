@@ -5,8 +5,10 @@ import org.bcos.browser.base.ConstantCode;
 import org.bcos.browser.entity.base.BaseResponse;
 import org.bcos.browser.entity.dto.Contract;
 import org.bcos.browser.entity.dto.Node;
+import org.bcos.browser.entity.dto.Test;
 import org.bcos.browser.mapper.ContractMapper;
 import org.bcos.browser.mapper.NodeMapper;
+import org.bcos.browser.mapper.TestMapper;
 import org.bcos.browser.util.JsonReadUtils;
 import org.bcos.browser.util.ProcessUtils;
 import org.json.JSONArray;
@@ -14,6 +16,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +30,9 @@ public class HanService {
 
     @Autowired
     ContractMapper contractMapper;
+
+    @Autowired
+    TestMapper testMapper;
 
     public BaseResponse getTimeStamp() {
         try {
@@ -99,6 +106,7 @@ public class HanService {
             List<Node> lists = nodeMapper.getAllNode(Integer.parseInt(groupId));
             String rpc = lists.get(0).getRpcPort();
             String ip = lists.get(0).getIp();
+            String p2p = lists.get(0).getP2pPort();
             List<Contract> contracts = contractMapper.getContractList(0,10);
             JSONArray array = new JSONArray();
             for(Contract contract: contracts) {
@@ -111,15 +119,73 @@ public class HanService {
             }
             JSONObject fisco = config1.getJSONObject("fiscoBCOS");
             JSONObject config = fisco.getJSONObject("config");
-            config.put("proxy", rpc);
+            config.put("proxy", ip + ":" + rpc);
             JSONObject node = fisco.getJSONObject("node0");
             node.put("p2pIP", ip);
             fisco.put("smartContracts", array);
+            JSONObject ports = fisco.getJSONObject("ports");
+            ports.put("rpc", rpc);
+            ports.put("p2p", p2p);
             JsonReadUtils.saveJson(config1_name, config1);
             return new BaseResponse(ConstantCode.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
             return new BaseResponse(ConstantCode.SYSTEM_ERROR);
         }
+    }
+
+    public void config2() {
+        Writer writer;
+
+        try {
+            Map m1,m2,m3,m4;
+            Yaml yaml = new Yaml();
+            File file = new File("setting.yaml");
+
+            //也可以将值转换为Map
+            m1 = (Map) yaml.load(new FileInputStream(file));
+            //通过map我们取值就可以了.
+            m2 = (Map) m1.get("tunnels");
+            m3 = (Map) m2.get("mc");
+            m3.put("remote_port", 44444);
+            m4 = (Map) m3.get("proto");
+            m4.put("tcp", 33333);
+
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(yaml.dump(m1));
+            fileWriter.flush();
+            fileWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public BaseResponse jsonSave(String userName) {
+        if(saveTest(userName)) { return new BaseResponse(ConstantCode.SUCCESS); }
+        else { return new BaseResponse(ConstantCode.SYSTEM_ERROR); }
+    }
+
+    public boolean saveTest(String userName) {
+        try {
+            JSONObject object = JsonReadUtils.readJson("report.json");
+            Long timeStamp = Long.parseLong(object.get("timestamp").toString());
+
+            Test test = new Test();
+            test.setTestTime(new Timestamp(timeStamp));
+            test.setTestResult(object.toString());
+            test.setUserName(userName);
+            testMapper.createTest();
+            return testMapper.saveTestResult(test);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void testShell() {
+
     }
 }

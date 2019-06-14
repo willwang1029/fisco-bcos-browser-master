@@ -11,4 +11,8 @@ public interface TestMapper {
     List<Test> getTestList(@Param(value = "username")String username);
 
     Test getTestResult(@Param(value = "testId")int testId);
+
+    boolean saveTestResult(Test test);
+
+    void createTest();
 }

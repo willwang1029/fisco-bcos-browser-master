@@ -7,6 +7,6 @@ import lombok.Data;
 public class Test {
     private int testId;
     private Timestamp testTime;
-    private String username;
+    private String userName;
     private String testResult;
 }

@@ -62,4 +62,10 @@ export default {
     ADD_USER: `${api}/user/add`,
 
     VERITY_USER: `${api}/user/verity`,
+
+    GET_TEST_RESULT: `${api}/test/testResult`,
+
+    GET_USER_INFO: `${api}/user/getUserInfo`,
+
+    UPDATE_USER: `${api}/user/modifyUser`
 }

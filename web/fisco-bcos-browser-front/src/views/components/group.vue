@@ -128,12 +128,16 @@ export default {
             return goPage(name,label,data);
         },
         startchain:function () {
-            startShell().catch(err => {
+            startShell().then(res=>{
+                message(constant.START_SHELL,'success');
+            }).catch(err => {
                 message(constant.ERROR,'error');
             })
         },
         stopchain:function () {
-            stopShell().catch(err => {
+            stopShell().then(res=>{
+                message(constant.STOP_SHELL,'success');
+            }).catch(err => {
                 message(constant.ERROR,'error');
             })
         }

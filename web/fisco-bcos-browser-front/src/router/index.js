@@ -151,6 +151,14 @@ const routes = [
                     requireAuth:true,
                 },
                 component:resolve => require(['@/views/components/algorithmConfig'],resolve),
+            },
+            {
+                path:'/userInfo',
+                name:'userInfo',
+                meta:{
+                    requireAuth:true,
+                },
+                component:resolve => require(['@/views/components/userInfo'],resolve),
             }
         ]
         }

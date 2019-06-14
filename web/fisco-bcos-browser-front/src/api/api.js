@@ -253,3 +253,27 @@ export function verityuser(data) {
     })
 }
 
+export function getTestResult(data) {
+    return get({
+        url: `${url.GET_TEST_RESULT}`,
+        method: 'get',
+        params: data
+    })
+}
+
+export function getUserInfo(data) {
+    return get({
+        url: `${url.GET_USER_INFO}`,
+        method: 'get',
+        params: data
+    })
+}
+
+export function modifyUser(data) {
+    return get({
+        url: url.UPDATE_USER,
+        method: 'get',
+        params: data
+    })
+}
+

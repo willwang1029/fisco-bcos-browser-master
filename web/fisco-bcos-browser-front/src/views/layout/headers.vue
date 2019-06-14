@@ -25,6 +25,7 @@
                              {{ruleForm.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item @click.native="linkPage('userInfo',chainType)">修改密码</el-dropdown-item>
                             <el-dropdown-item @click.native="linkPage('test',chainType)">我的测试</el-dropdown-item>
                             <el-dropdown-item @click.native="clearCookie">退出登录</el-dropdown-item>
                         </el-dropdown-menu>

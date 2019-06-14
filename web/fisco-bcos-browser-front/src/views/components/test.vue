@@ -11,7 +11,8 @@
             </div>
             <div class="search-table">
                 <el-table :data="testList" element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)">
-                    <el-table-column prop="testId" label="测试轮数" min-width="100px"  align="center" :show-overflow-tooltip="true"></el-table-column>
+<!--                    <el-table-column prop="testId" label="测试轮数" min-width="100px"  align="center" :show-overflow-tooltip="true"></el-table-column>-->
+                    <el-table-column type="index" label="序号" align="center" min-width='300px'></el-table-column>
                     <el-table-column prop="testTime" label="测试时间" min-width="120px" :show-overflow-tooltip="true" align="center"></el-table-column>
                     <el-table-column label="查看测试报告" min-width="150px"align="center">
                         <template slot-scope="scope">
@@ -30,6 +31,7 @@
     import date from "../../util/timechange";
     import testConfig from "./testConfig";
     import testDetail from "./testDetail";
+    import {getTestResult} from "../../api/api";
     let minMonthData=null;
     let maxMonthData=null;
     let months=MonthState((new Date()).getTime())
@@ -55,6 +57,7 @@
                     userName: '', //用户名
                     password: ''  //密码
                 },
+                testResult:{}
             }
         },
         mounted: function(){
@@ -105,6 +108,20 @@
             linkPage: function (name,label,data) {
                 return goPage(name,label,data);
             },
+            goDetail: function (val) {
+                let result={
+                    userId:val
+                }
+                getTestResult(result).then(res => {
+                    let timeresult = res.data.data
+                    timeresult.forEach(item => {
+                        item.testTime = date(item.testTime,'yyyy-MM-dd HH:mm:ss')
+                    });
+                    this.testResult = timeresult;
+                }).catch(err=>{
+                    message(constant.ERROR,'error');
+                })
+            }
         },
     }
 </script>

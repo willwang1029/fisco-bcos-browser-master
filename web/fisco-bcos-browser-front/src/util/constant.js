@@ -151,6 +151,20 @@ export default {
 
     ADD_USER_SUCCESS: '注册成功',
 
+    PSW_ERROR1: '密码不得少于六位',
+
+    PSW_ERROR2: '密码不得是纯数字',
+
+    PSW_ERROR3: '两次输入的新密码不一样',
+
+    PSW_ERROR4: '原密码不正确',
+
+    PSW_SUCCESS: '修改成功',
+
+    START_SHELL: '启动节点成功',
+
+    STOP_SHELL: '暂停节点成功',
+
     INTERVALTIME: 20000,
 
     CHAIN_OPTION: [

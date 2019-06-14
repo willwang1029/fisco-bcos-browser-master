@@ -64,4 +64,7 @@ public class HanController {
     @GetMapping("/jsonSave")
     public BaseResponse jsonSave(String userName) { return hservice.jsonSave(userName); }
 
+
+    @GetMapping("/config")
+    public BaseResponse config() { return hservice.config(); }
 }

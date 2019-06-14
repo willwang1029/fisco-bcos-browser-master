@@ -53,6 +53,7 @@ dependencies {
     compile "com.github.briandilley.jsonrpc4j:jsonrpc4j:1.5.1"
     compile "org.apache.commons:commons-lang3:3.6"
     compile 'com.alibaba:fastjson:1.2.29'
+	compile 'org.yaml:snakeyaml:1.23'
     annotationProcessor 'org.projectlombok:lombok:1.18.2'
     compileOnly 'org.projectlombok:lombok:1.18.2'
 }

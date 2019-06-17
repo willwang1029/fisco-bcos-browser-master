@@ -16,7 +16,9 @@
                     <el-table-column prop="testTime" label="测试时间" min-width="120px" :show-overflow-tooltip="true" align="center"></el-table-column>
                     <el-table-column label="查看测试报告" min-width="150px"align="center">
                         <template slot-scope="scope">
-                            <el-button type="primary" @click="linkPage('testDetail',chainType)">查看</el-button>
+<!--                            <el-button type="primary" @click="linkPage('testDetail','testId',scope.$index)">查看</el-button>-->
+
+                            <el-button type="primary" @click="goDetail(scope.$index)">查看</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -109,18 +111,20 @@
                 return goPage(name,label,data);
             },
             goDetail: function (val) {
-                let result={
-                    userId:val
-                }
-                getTestResult(result).then(res => {
-                    let timeresult = res.data.data
-                    timeresult.forEach(item => {
-                        item.testTime = date(item.testTime,'yyyy-MM-dd HH:mm:ss')
-                    });
-                    this.testResult = timeresult;
-                }).catch(err=>{
-                    message(constant.ERROR,'error');
-                })
+                // let result={
+                //     userId:val
+                // }
+                // getTestResult(result).then(res => {
+                //     let timeresult = res.data.data
+                //     timeresult.forEach(item => {
+                //         item.testTime = date(item.testTime,'yyyy-MM-dd HH:mm:ss')
+                //     });
+                //     this.testResult = timeresult;
+                // }).catch(err=>{
+                //     message(constant.ERROR,'error');
+                // })
+                let a=this.testList[val].testId;
+                this.linkPage('testDetail','testId',a)
             }
         },
     }

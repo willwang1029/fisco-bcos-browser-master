@@ -71,7 +71,7 @@
 </template>
 
 <script>
-    import {getJson} from "../../api/api";
+    import {getJson, getTestResult} from "../../api/api";
     import date from "../../util/timechange";
 
     export default {
@@ -92,19 +92,26 @@
                 },
                 loading3: false,
                 roundsData:"",
-                testTime:""
+                testTime:"",
+                testId:this.$route.query.testId
             }
         },
         mounted: function(){
-            this.Test("test");
+            this.Test(this.testId);
         },
         methods:{
             Test:function (val) {
-                let result="";
-                getJson(result).then(res => {
-                    console.log(res.data);
-                    this.roundsData=res.data.data.rounds;
-                    this.testTime=res.data.data.timestamp;
+                let result={
+                    testId:val
+                }
+                // getTestResult(result).then(res=>{
+                //     console.log(res.data.data)
+                // })
+                getTestResult(result).then(res => {
+                    console.log(res.data.data.testResult);
+                    let rs=JSON.parse(res.data.data.testResult)
+                    this.roundsData=rs.rounds;
+                    this.testTime=rs.timestamp;
                     this.testTime = date(this.testTime,'yyyy-MM-dd HH:mm:ss')
                 }).catch(err=>{
                     message(constant.ERROR,'error');

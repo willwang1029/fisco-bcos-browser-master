@@ -122,17 +122,6 @@
     </update>
 
 
-
-    <update id="createTbTest">
-        CREATE TABLE IF NOT EXISTS ${tableName} (
-            test_id varchar(255) COMMENT '测试报告id',
-            user_name varchar(255) COMMENT '用户名',
-            test_result varchar(20000) COMMENT '测试结果',
-            test_time timestamp(3) COMMENT '测试时间',
-            PRIMARY KEY (test_id)
-        ) COMMENT='测试信息表' ENGINE=InnoDB DEFAULT CHARSET=utf8
-    </update>
-
     <update id="dropTableByName">
         DROP TABLE IF EXISTS ${tableName}
     </update>

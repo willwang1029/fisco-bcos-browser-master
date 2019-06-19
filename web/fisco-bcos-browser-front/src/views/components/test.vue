@@ -12,8 +12,8 @@
             <div class="search-table">
                 <el-table :data="testList" element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)">
 <!--                    <el-table-column prop="testId" label="测试轮数" min-width="100px"  align="center" :show-overflow-tooltip="true"></el-table-column>-->
-                    <el-table-column type="index" label="序号" align="center" min-width='300px'></el-table-column>
-                    <el-table-column prop="testTime" label="测试时间" min-width="120px" :show-overflow-tooltip="true" align="center"></el-table-column>
+                    <el-table-column type="index" label="序号" width="300" align="center" min-width='300px'></el-table-column>
+                    <el-table-column prop="testTime" label="测试时间" width="700" min-width="120px" :show-overflow-tooltip="true" align="center"></el-table-column>
                     <el-table-column label="查看测试报告" min-width="150px"align="center">
                         <template slot-scope="scope">
 <!--                            <el-button type="primary" @click="linkPage('testDetail','testId',scope.$index)">查看</el-button>-->

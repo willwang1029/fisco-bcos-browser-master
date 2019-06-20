@@ -67,5 +67,7 @@ export default {
 
     GET_USER_INFO: `${api}/user/getUserInfo`,
 
-    UPDATE_USER: `${api}/user/modifyUser`
+    UPDATE_USER: `${api}/user/modifyUser`,
+
+    ADD_CONFIG2:`${api}/han/config2`,
 }

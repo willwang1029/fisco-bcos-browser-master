@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "han")
@@ -64,9 +65,6 @@ public class HanController {
     @GetMapping("/jsonSave")
     public BaseResponse jsonSave(String userName) { return hservice.jsonSave(userName); }
 
-    @GetMapping("/config")
-    public BaseResponse config() { return hservice.config(); }
-
     @PostMapping("/upload")
     public void uploadExam(@RequestParam("file") MultipartFile file, String file_name, String label, String duration,
                            String tps) {
@@ -80,5 +78,11 @@ public class HanController {
             e.printStackTrace();
 
         }
+    }
+
+    @PostMapping("/config2")
+    public BaseResponse config2(List<String[]> list){
+        BaseResponse response=hservice.config2(list);
+        return response;
     }
 }

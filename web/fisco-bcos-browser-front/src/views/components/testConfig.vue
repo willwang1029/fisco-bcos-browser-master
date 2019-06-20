@@ -11,7 +11,7 @@
                             </div>
                         </el-col>
                         <el-col :span="10">
-                            <el-input placeholder="名称" v-model="item.val">
+                            <el-input placeholder="名称" v-model="item.name">
                                 <template slot="prepend">名称：</template>
                             </el-input>
                         </el-col>
@@ -40,33 +40,56 @@
                 </div>
             </div>
             <el-button style="margin-left: 370px;margin-top: 30px" type="primary" @click="addInput()"><i class="el-icon-plus"></i>新增轮数</el-button>
-            <el-button style="margin-left: 370px;margin-top: 30px" type="primary" @click="sub()"><i class="el-icon-setting"></i> 开始测试</el-button>
-            <h1>提交的信息： {{submsg}}</h1>
+            <el-button style="margin-left: 370px;margin-top: 30px;margin-bottom: 20px" type="primary" @click="sub()"><i class="el-icon-setting"></i> 开始测试</el-button>
         </div>
+        <h1>{{sublist}}</h1>
     </div>
 </template>
 
 <script>
+    import {config2} from "../../api/api";
+    import constant from "../../util/constant";
+
+    let Base64 = require("js-base64").Base64;
     export default {
         name: "testConfig",
         data (){
             return {
                 inputs:[],
-                submsg:'',
+                scriptList:[],
+                sublist:'',
             }
         },
         methods: {
             addInput (){
                 var obj = {};
                 obj.id = this.inputs.length;
-                obj.val = "";
+                obj.name = "";
                 obj.time="";
                 obj.speed="";
-                obj.json = {};
                 this.inputs.push(obj);
             },
             sub (){
-                this.submsg = this.inputs;
+                let data = {
+                }
+                if(this.scriptList.length){
+                    data.data = [];
+                    this.scriptList.forEach((value,index) => {
+                        data.data[index] = {};
+                        data.data[index].scriptPath = value.filepath;
+                    })
+                    this.inputs.forEach((value,index)=>{
+                        data.data[index].name=value.name;
+                        data.data[index].time=value.time;
+                        data.data[index].speed=value.speed;
+                    })
+                }
+                this.sublist=data.data
+                config2(data).then(res => {
+                    message('测试配置成功！','success')
+                }).catch(err => {
+                        message('测试配置失败', 'error')
+                })
             },
             removeConfig(index){
                 this.inputs.splice(index,1)
@@ -80,15 +103,42 @@
                 }
             },
             upLoad: function(index,e) {
-                var that=this
+                let files = [];
+                let filessize = [];
+                let filetype = [];
                 for(let i = 0; i < e.target.files.length; i++){
-                    let file = e.target.files[i];
-                    let reader = new FileReader(); //add a FileReader
-                    reader.readAsText(file, "UTF-8"); //read file
-                    reader.onload = function(evt) {
-                        that.inputs[index].json = evt.target.result; // read file content'
-                    };
+                    files[i] = e.target.files[i];
+                    filessize[i] = Math.ceil(files[i].size / 1024);
+                    filetype[i] = files[i].name.split(".")[1];
+                    if (filessize[i] > 400) {
+                        this.$message({
+                            message: '文件大小超过400k，请上传小于400k的文件',
+                            type: "error"
+                        });
+                    } else if (filetype[i] !== "json") {
+                        this.$message({
+                            message: '请上传.json格式的文件',
+                            type: "error"
+                        });
+                    } else {
+                        let filsObj = {};
+                        filsObj.filename = files[i].name.split(".")[0];
+                        filsObj.file = files[i].name;
+                        filsObj.filepath='benchmark/fisco-bcos/v2.0/helloworld/'+files[i].name;
+                        let reader = new FileReader(); //add a FileReader
+                        reader.readAsText(files[i], "UTF-8"); //read file
+                        let that=this;
+                        that.scriptList.push(filsObj)
+                        // reader.onload = function(evt) {
+                        //     //that.inputs[index].json = evt.target.result; // read file content'
+                        //     filsObj.fileString = Base64.encode(evt.target.result); // read file content
+                        //     if(filsObj.fileString){
+                        //         that.scriptList.push(filsObj)
+                        //     }
+                        // };
+                    }
                 }
+                this.$refs.file.value = "";
             },
         }
     }

@@ -335,7 +335,7 @@ export default {
                 this.fileList.forEach((value,index) => {
                     data.data[index] = {};
                     data.data[index].contractName = value.filename;
-                    data.data[index].contractPath = "/";
+                    data.data[index].contractPath = "src/contract/fisco-bcos/"+value.filename+"/";
                     data.data[index].contractSource = value.fileString;
                 })
             }else{

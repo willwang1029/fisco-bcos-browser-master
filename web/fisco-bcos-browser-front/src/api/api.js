@@ -277,3 +277,11 @@ export function modifyUser(data) {
     })
 }
 
+export function config2(data) {
+    return post({
+        url: url.ADD_CONFIG2,
+        method: 'post',
+        data: data
+    })
+}
+

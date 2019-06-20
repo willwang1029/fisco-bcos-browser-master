@@ -133,7 +133,7 @@ public class HanService {
         }
     }
 
-    public boolean config2(List<String[]> list) {
+    public BaseResponse config2(List<String[]> list) {
         try {
             Map m1, test;
             Yaml yaml = new Yaml();
@@ -169,10 +169,10 @@ public class HanService {
             fileWriter.write(yaml.dump(m1));
             fileWriter.flush();
             fileWriter.close();
-            return true;
+            return new BaseResponse(ConstantCode.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return new BaseResponse(ConstantCode.SYSTEM_ERROR);
         }
     }
 
@@ -181,15 +181,6 @@ public class HanService {
         else { return new BaseResponse(ConstantCode.SYSTEM_ERROR); }
     }
 
-    public BaseResponse config() {
-        List<String[]> list = new ArrayList<>();
-        String[] data1 = new String[]{"test1", "10", "100", "127.0.0.1"};
-        list.add(data1);
-        list.add(data1);
-        list.add(data1);
-        if(config2(list)) { return new BaseResponse(ConstantCode.SUCCESS); }
-        else { return new BaseResponse(ConstantCode.SYSTEM_ERROR); }
-    }
 
     public boolean saveTest(String userName) {
         try {

@@ -42,12 +42,12 @@
             <el-button style="margin-left: 370px;margin-top: 30px" type="primary" @click="addInput()"><i class="el-icon-plus"></i>新增轮数</el-button>
             <el-button style="margin-left: 370px;margin-top: 30px;margin-bottom: 20px" type="primary" @click="sub()"><i class="el-icon-setting"></i> 开始测试</el-button>
         </div>
-        <h1>{{sublist}}</h1>
     </div>
 </template>
 
 <script>
-    import {config2} from "../../api/api";
+    import {config2, startTest} from "../../api/api";
+    import { message } from '@/util/util'
     import constant from "../../util/constant";
 
     let Base64 = require("js-base64").Base64;
@@ -58,6 +58,8 @@
                 inputs:[],
                 scriptList:[],
                 sublist:'',
+                chainType: this.$route.query.chainType || "01",
+                groupId: null,
             }
         },
         methods: {
@@ -88,7 +90,14 @@
                 config2(data).then(res => {
                     message('测试配置成功！','success')
                 }).catch(err => {
-                        message('测试配置失败', 'error')
+                    message('测试配置失败', 'error')
+                })
+                this.groupId = localStorage.getItem("groupId")
+                let result = {groupId: this.groupId}
+                startTest(result).then(res => {
+                    message('测试配置成功！','success')
+                }).catch(err => {
+                    message('测试配置失败', 'error')
                 })
             },
             removeConfig(index){
@@ -190,10 +199,10 @@
     .inputFiles{
         position: absolute;
         opacity: 0;
-        left: 820px;
+        left: 804px;
         top: 0;
-        width: 100px;
-        height: 50px;
+        width: 112px;
+        height: 40px;
 
     }
 </style>

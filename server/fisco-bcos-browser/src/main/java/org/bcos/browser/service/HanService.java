@@ -113,12 +113,13 @@ public class HanService {
                 object.put("id", contract.getContractId());
                 object.put("name", contract.getContractName());
                 object.put("path", contract.getContractPath());
+                System.out.println(contract.getContractPath());
                 object.put("language", "solidity");
                 array.put(object);
             }
             JSONObject fisco = config1.getJSONObject("fiscoBCOS");
             JSONObject config = fisco.getJSONObject("config");
-            config.put("proxy", ip + ":" + rpc);
+            config.put("proxy", "http://" + ip + ":" + rpc);
             JSONObject node = fisco.getJSONObject("node0");
             node.put("p2pIP", ip);
             fisco.put("smartContracts", array);

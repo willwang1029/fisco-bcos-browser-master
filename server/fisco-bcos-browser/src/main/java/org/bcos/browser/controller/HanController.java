@@ -61,8 +61,10 @@ public class HanController {
     }
 
     @PostMapping("/startTest")
-    public BaseResponse startTest(String str) {
-        return hservice.startTest(str);
+    public BaseResponse startTest(@RequestBody String str) {
+        System.out.println(str);
+        JSONObject object = JSONObject.parseObject(str);
+        return hservice.startTest(object.getString("groupId"));
     }
 
     @GetMapping("/jsonSave")

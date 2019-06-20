@@ -52,7 +52,6 @@
                 </div>
             </div>
         </div>
-        <h1>提交的信息： {{submsg}}</h1>
     </div>
 </template>
 

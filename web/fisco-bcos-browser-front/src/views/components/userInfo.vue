@@ -1,35 +1,78 @@
 <template>
     <div class="test-nav">
         <div class="input">
-            <el-row :gutter="20">
-                <el-col :span="13">
-                    <div class="infotest">用户名：{{testResult.userName}}</div>
-                </el-col>
-                <el-col :span="7">
-                    <div class="infotest">邮箱：{{testResult.email}}</div>
-                </el-col>
-            </el-row>
+<!--            <el-row :gutter="20">-->
+<!--                <el-col :span="13">-->
+<!--                    <div class="infotest">用户名：{{testResult.userName}}</div>-->
+<!--                </el-col>-->
+<!--                <el-col :span="7">-->
+<!--                    <div class="infotest">邮箱：{{testResult.email}}</div>-->
+<!--                </el-col>-->
+<!--            </el-row>-->
+<!--            <el-form class="form-block" status-icon :model="inputs" :rules="rules" ref="ruleForm" label-width="0px"-->
+<!--                     :validate-on-rule-change="false">-->
+<!--                <el-form-item>-->
+<!--                    <el-input :type="passwordType" placeholder="原密码" v-model="inputs.oldpwd" name="password" auto-complete="on">-->
+<!--                        <template slot="prepend">原密码：</template>-->
+<!--                    </el-input>-->
+<!--                </el-form-item>-->
+<!--                <el-form-item>-->
+<!--                    <el-input :type="passwordType" placeholder="新密码" v-model="inputs.newpwd1">-->
+<!--                        <template slot="prepend">新密码：</template>-->
+<!--                    </el-input>-->
+<!--                </el-form-item>-->
+<!--                <el-form-item>-->
+<!--                    <el-input :type="passwordType" placeholder="新密码" v-model="inputs.newpwd2">-->
+<!--                        <template slot="prepend">新密码：</template>-->
+<!--                    </el-input>-->
+<!--                </el-form-item>-->
+<!--                <el-form-item>-->
+<!--                    <el-button style="display:block;margin:5px auto;" type="primary" @click="changepwd()">修改密码</el-button>-->
+<!--                </el-form-item>-->
+<!--            </el-form>-->
 
             <el-form class="form-block" status-icon :model="inputs" :rules="rules" ref="ruleForm" label-width="0px"
                      :validate-on-rule-change="false">
-                <el-form-item>
-                    <el-input :type="passwordType" placeholder="原密码" v-model="inputs.oldpwd" name="password" auto-complete="on">
-                        <template slot="prepend">原密码：</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-input :type="passwordType" placeholder="新密码" v-model="inputs.newpwd1">
-                        <template slot="prepend">新密码：</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-input :type="passwordType" placeholder="新密码" v-model="inputs.newpwd2">
-                        <template slot="prepend">新密码：</template>
-                    </el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-button style="display:block;margin:5px auto;" type="primary" @click="changepwd()">修改密码</el-button>
-                </el-form-item>
+                <el-row :gutter="20">
+                    <el-col :span="13">
+                        <el-form-item style="width: 400px">
+                            <el-input :type="passwordType" placeholder="原密码" v-model="inputs.oldpwd" name="password" auto-complete="on">
+                                <template slot="prepend">原密码：</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="7">
+                        <div class="infotest">用户名：{{testResult.userName}}</div>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                    <el-col :span="13">
+                        <el-form-item style="width: 400px">
+                            <el-input :type="passwordType" placeholder="新密码" v-model="inputs.newpwd1">
+                                <template slot="prepend">新密码：</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="7">
+                        <div class="infotest">邮箱：{{testResult.email}}</div>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                    <el-col :span="13">
+                        <el-form-item style="width: 400px">
+                            <el-input :type="passwordType" placeholder="新密码" v-model="inputs.newpwd2">
+                                <template slot="prepend">新密码：</template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                    <el-col :span="13">
+                        <el-form-item style="width: 400px">
+                            <el-button style="display:block;margin:5px auto;" type="primary" @click="changepwd()">修改密码</el-button>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
             </el-form>
         </div>
     </div>
@@ -135,11 +178,12 @@
     .input {
         margin-left: 53px;
         margin-right: 50px;
+        margin-top: 30px;
     }
 
     .el-row {
-        margin-top: 20px;
-        margin-bottom: 30px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .el-col {
@@ -147,12 +191,10 @@
     }
 
     .infotest {
-        margin-top: 20px;
         font-size: 20px;
         margin-bottom: 30px;
     }
     .form-block {
-        margin: 5px auto;
-        width: 450px;
+        margin-left: 100px;
     }
 </style>

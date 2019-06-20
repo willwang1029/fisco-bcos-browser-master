@@ -1,5 +1,7 @@
 package org.bcos.browser.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.bcos.browser.entity.base.BaseResponse;
 import org.bcos.browser.service.HanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -81,8 +84,20 @@ public class HanController {
     }
 
     @PostMapping("/config2")
-    public BaseResponse config2(List<String[]> list){
-        BaseResponse response=hservice.config2(list);
+    public BaseResponse config2(@RequestBody String data){
+        JSONObject object = JSONObject.parseObject(data);
+        JSONArray array = object.getJSONArray("data");
+        List<String[]> list = new ArrayList<>();
+        for(int i = 0; i < array.size(); i ++) {
+            JSONObject temp = array.getJSONObject(i);
+            String[] str = new String[4];
+            str[0] = temp.getString("name");
+            str[1] = temp.getString("speed");
+            str[2] = temp.getString("time");
+            str[3] = temp.getString("scriptPath");
+            list.add(str);
+        }
+        BaseResponse response = hservice.config2(list);
         return response;
     }
 }

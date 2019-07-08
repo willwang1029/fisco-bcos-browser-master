@@ -4,3 +4,5 @@ server/fisco-bcos-browser/.idea/workspace.xml
 *.gz
 *.log
 *.xml
+server/fisco-bcos-browser/out/production/resources/application.yml
+server/fisco-bcos-browser/out/production/resources/application.yml

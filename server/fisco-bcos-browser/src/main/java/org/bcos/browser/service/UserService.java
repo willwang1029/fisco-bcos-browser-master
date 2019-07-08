@@ -16,7 +16,7 @@ public class UserService {
     UserMapper userMapper;
 
     public BaseResponse addUser(String userName, String email, String password) {
-        userMapper.createTbUser("user");
+        userMapper.createUser();
         int count = userMapper.getUser(userName, email);
         if(count > 0) { return new BaseResponse(ConstantCode.SYSTEM_ERROR); }
         else {

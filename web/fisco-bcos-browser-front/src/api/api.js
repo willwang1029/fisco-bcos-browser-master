@@ -285,3 +285,11 @@ export function config2(data) {
     })
 }
 
+export function startTest(data) {
+    return post({
+        url: url.START_TEST,
+        method: 'post',
+        data: data
+    })
+}
+

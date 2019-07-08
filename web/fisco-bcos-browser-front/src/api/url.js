@@ -70,4 +70,6 @@ export default {
     UPDATE_USER: `${api}/user/modifyUser`,
 
     ADD_CONFIG2:`${api}/han/config2`,
+
+    START_TEST: `${api}/han/startTest`,
 }

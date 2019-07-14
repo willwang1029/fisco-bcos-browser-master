@@ -293,3 +293,18 @@ export function startTest(data) {
     })
 }
 
+export function jsonSave(data) {
+    return get({
+        url: url.JSON_SAVE,
+        method: 'get',
+        params: data
+    })
+}
+
+export function latestTest(data) {
+    return get({
+        url: url.LATEST_TEST,
+        method: 'get',
+        params: data
+    })
+}

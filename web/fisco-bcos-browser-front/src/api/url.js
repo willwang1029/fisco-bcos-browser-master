@@ -72,4 +72,8 @@ export default {
     ADD_CONFIG2:`${api}/han/config2`,
 
     START_TEST: `${api}/han/startTest`,
+
+    JSON_SAVE: `${api}/han/jsonSave`,
+
+    LATEST_TEST: `${api}/test/latestTest`,
 }

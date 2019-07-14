@@ -25,4 +25,10 @@ public class TestController extends BaseController {
         BaseResponse response=testService.getTestResult(testId);
         return response;
     }
+
+    @GetMapping("/latestTest")
+    public BaseResponse getLatestTest(String username){
+        BaseResponse response=testService.getLatestTest(username);
+        return response;
+    }
 }

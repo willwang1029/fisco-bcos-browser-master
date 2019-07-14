@@ -8,7 +8,7 @@ public class JsonReadUtils {
 
     public static JSONObject readJson(String fileName) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("./data/" + fileName));
+            BufferedReader br = new BufferedReader(new FileReader("/root/fisco/caliper/" + fileName));
             StringBuilder sb = new StringBuilder();
             String s = null;
             while ((s = br.readLine()) != null) { sb.append(s); }
@@ -22,7 +22,7 @@ public class JsonReadUtils {
 
     public static void saveJson(String fileName, JSONObject json) {
         BufferedWriter writer = null;
-        File file = new File("./data/" + fileName);
+        File file = new File("/root/fisco/caliper/" + fileName);
         try {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file,false), "UTF-8"));
             writer.write(format(json.toString()));

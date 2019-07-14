@@ -40,15 +40,16 @@
                 </div>
             </div>
             <el-button style="margin-left: 370px;margin-top: 30px" type="primary" @click="addInput()"><i class="el-icon-plus"></i>新增轮数</el-button>
-            <el-button style="margin-left: 370px;margin-top: 30px;margin-bottom: 20px" type="primary" @click="sub()"><i class="el-icon-setting"></i> 开始测试</el-button>
+            <el-button style="margin-left: 370px;margin-top: 30px;margin-bottom: 20px" type="primary" @click="teststart()"><i class="el-icon-setting"></i> 开始测试</el-button>
         </div>
     </div>
 </template>
 
 <script>
-    import {config2, startTest} from "../../api/api";
+    import {config2, jsonSave, latestTest, startTest} from "../../api/api";
     import { message } from '@/util/util'
     import constant from "../../util/constant";
+    import {goPage} from "../../util/util";
 
     let Base64 = require("js-base64").Base64;
     export default {
@@ -60,9 +61,30 @@
                 sublist:'',
                 chainType: this.$route.query.chainType || "01",
                 groupId: null,
+                ruleForm: {
+                    userName: '', // 用户名
+                    password: '' // 密码
+                },
+                resultId:"",
             }
         },
+        mounted: function() {
+            this.getCookie()
+        },
         methods: {
+            getCookie: function() {
+                if (document.cookie.length > 0) {
+                    var arr = document.cookie.split(';')
+                    for (var i = 0; i < arr.length; i++) {
+                        var arr2 = arr[i].split('=')
+                        if (arr2[0] === 'userName') {
+                            this.ruleForm.userName = arr2[1]
+                        } else if (arr2[0] === 'userPwd') {
+                            this.ruleForm.password = arr2[1]
+                        }
+                    }
+                }
+            },
             addInput (){
                 var obj = {};
                 obj.id = this.inputs.length;
@@ -70,6 +92,26 @@
                 obj.time="";
                 obj.speed="";
                 this.inputs.push(obj);
+            },
+            teststart:function(){
+                let result={
+                    username:this.ruleForm.userName
+                }
+                jsonSave(result).then(res =>{
+                    console.log(res.data.data);
+                }).catch(err=>{
+                    message(constant.ERROR,'error');
+                })
+                latestTest(result).then(res =>{
+                    console.log(res.data.data.testId);
+                    this.resultId=res.data.data.testId;
+                    this.linkPage('testDetail','testId',this.resultId)
+                }).catch(err=>{
+                    message(constant.ERROR,'error');
+                })
+            },
+            linkPage: function (name,label,data) {
+                return goPage(name,label,data);
             },
             sub (){
                 let data = {

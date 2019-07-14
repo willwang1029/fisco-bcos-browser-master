@@ -19,6 +19,17 @@
         WHERE test_id=#{testId}
     </select>
 
+    <select id="getLatestTest" resultType="org.bcos.browser.entity.dto.Test">
+        SELECT test_id as testId,
+               user_name as username,
+               test_result as testResult,
+               test_time as testTime
+        FROM tb_test
+        WHERE user_name=#{username}
+        order by test_time desc
+        limit 1
+    </select>
+
     <insert id="saveTestResult" useGeneratedKeys="true" parameterType="org.bcos.browser.entity.dto.Test">
         INSERT INTO tb_test(test_time, user_name, test_result)
         VALUES(#{testTime}, #{userName}, #{testResult})

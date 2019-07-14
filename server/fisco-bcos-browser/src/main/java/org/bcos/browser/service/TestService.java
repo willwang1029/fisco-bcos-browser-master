@@ -29,4 +29,11 @@ public class TestService {
         response.setData(testresult);
         return response;
     }
+
+    public BaseResponse getLatestTest(String username){
+        BaseResponse response = new BaseResponse(ConstantCode.SUCCESS);
+        Test testresult=testMapper.getLatestTest(username);
+        response.setData(testresult);
+        return response;
+    }
 }

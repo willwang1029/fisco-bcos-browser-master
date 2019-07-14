@@ -17,7 +17,5 @@ public interface UserMapper {
 
     void modifyUser(@Param(value = "userName")String userName,@Param(value = "passWord")String passWord);
 
-    void createTbUser(@Param(value = "tableName")String tableName);
-
     void createUser();
 }

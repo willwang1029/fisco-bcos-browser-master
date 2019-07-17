@@ -179,7 +179,7 @@ public class HanService {
 
     public BaseResponse jsonSave(String userName) {
         if(saveTest(userName)) {
-            System.out.println(ProcessUtils.test());
+            ProcessUtils.test();
             return new BaseResponse(ConstantCode.SUCCESS); }
         else { return new BaseResponse(ConstantCode.SYSTEM_ERROR); }
     }

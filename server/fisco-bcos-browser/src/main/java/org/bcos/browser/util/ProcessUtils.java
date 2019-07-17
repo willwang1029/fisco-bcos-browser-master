@@ -1,6 +1,7 @@
 package org.bcos.browser.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 
 public class ProcessUtils {
@@ -24,7 +25,8 @@ public class ProcessUtils {
 
     public static void test() {
         try {
-            Process ps = Runtime.getRuntime().exec("node /root/fisco/caliper/benchmark/fisco-bcos/v2.0/helloworld/main.js");
+            Process ps = Runtime.getRuntime().exec("node /benchmark/fisco-bcos/v2.0/helloworld/main.js",
+                    null, new File("/root/fisco/caliper"));
             ps.waitFor();
             System.out.println("Test finish!");
         }

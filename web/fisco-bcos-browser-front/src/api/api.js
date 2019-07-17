@@ -297,7 +297,8 @@ export function jsonSave(data) {
     return get({
         url: url.JSON_SAVE,
         method: 'get',
-        params: data
+        params: data,
+        timeout: 600000
     })
 }
 

@@ -178,6 +178,7 @@ public class HanService {
     }
 
     public BaseResponse jsonSave(String userName) {
+        System.out.println(userName);
         ProcessUtils.test();
         if(saveTest(userName)) {
             return new BaseResponse(ConstantCode.SUCCESS); }
@@ -200,9 +201,5 @@ public class HanService {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public void testShell() {
-
     }
 }

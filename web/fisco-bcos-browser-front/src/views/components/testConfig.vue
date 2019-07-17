@@ -95,17 +95,17 @@
             },
             teststart:function(){
                 let result={
-                    username:this.ruleForm.userName
+                    userName:this.ruleForm.userName
                 }
                 jsonSave(result).then(res =>{
                     console.log(res.data.data);
-                }).catch(err=>{
-                    message(constant.ERROR,'error');
-                })
-                latestTest(result).then(res =>{
-                    console.log(res.data.data.testId);
-                    this.resultId=res.data.data.testId;
-                    this.linkPage('testDetail','testId',this.resultId)
+                    latestTest(result).then(res =>{
+                        console.log(res.data.data.testId);
+                        this.resultId=res.data.data.testId;
+                        this.linkPage('testDetail','testId',this.resultId)
+                    }).catch(err=>{
+                        message(constant.ERROR,'error');
+                    })
                 }).catch(err=>{
                     message(constant.ERROR,'error');
                 })

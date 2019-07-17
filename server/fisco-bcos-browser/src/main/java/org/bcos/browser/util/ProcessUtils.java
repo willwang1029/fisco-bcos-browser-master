@@ -25,7 +25,7 @@ public class ProcessUtils {
 
     public static void test() {
         try {
-            Process ps = Runtime.getRuntime().exec("node /benchmark/fisco-bcos/v2.0/helloworld/main.js",
+            Process ps = Runtime.getRuntime().exec("node benchmark/fisco-bcos/v2.0/helloworld/main.js",
                     null, new File("/root/fisco/caliper"));
             ps.waitFor();
             System.out.println("Test finish!");

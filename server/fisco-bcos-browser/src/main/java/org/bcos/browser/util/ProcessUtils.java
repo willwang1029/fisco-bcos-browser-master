@@ -27,6 +27,7 @@ public class ProcessUtils {
             Process ps = Runtime.getRuntime().exec("cd /root/fisco/caliper &" +
                     " node benchmark/fisco-bcos/v2.0/hellowprld/main.js");
             ps.waitFor();
+            System.out.println("Test finish!");
         }
         catch (Exception e) {
             e.printStackTrace();

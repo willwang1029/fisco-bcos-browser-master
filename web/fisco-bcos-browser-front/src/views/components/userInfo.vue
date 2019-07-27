@@ -82,6 +82,7 @@
     import { getUserInfo, modifyUser } from '../../api/api'
     import { message } from '@/util/util'
     import constant from '@/util/constant'
+    import {goPage} from "../../util/util";
 
     export default {
         name: 'userInfo',
@@ -102,7 +103,8 @@
                     password: '' // 密码
                 },
                 passwordType: 'password',
-                testResult: {}
+                testResult: {},
+                chainType: this.$route.query.chainType || "01",
             }
         },
         mounted: function() {
@@ -136,6 +138,9 @@
                         message(constant.ERROR, 'error')
                     })
             },
+            linkPage: function (name,label,data) {
+                return goPage(name,label,data);
+            },
             changepwd: function() {
                 if (this.inputs.oldpwd.length < 6 || this.inputs.newpwd1.length < 6 || this.inputs.newpwd2.length < 6) {
                     message(constant.PSW_ERROR1, 'error')
@@ -156,6 +161,7 @@
                             this.inputs.oldpwd = ''
                             this.inputs.newpwd1 = ''
                             this.inputs.newpwd2 = ''
+                            this.linkPage('index',this.chainType);
                         })
                         .catch(err => {
                             message(constant.ERROR, 'error')

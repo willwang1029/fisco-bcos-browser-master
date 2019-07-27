@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import {getTestList} from "@/api/api";
+    import {getTestList} from "../../api/api";
     import {goPage, MonthState, timeState} from "../../util/util";
     import date from "../../util/timechange";
     import testConfig from "./testConfig";
@@ -64,19 +64,20 @@
         },
         mounted: function(){
             this.getCookie();
-            this.Test("test");
+            this.Test();
 
         },
         beforeDestroy: function () {
             window.clearInterval(this.setIntervalTime);
         },
         methods:{
-            Test:function (val) {
+            Test:function () {
                 let result={
-                    username:this.ruleForm.userName
+                    userName:this.ruleForm.userName
                 }
                 getTestList(result).then(res => {
                     let timeresult = res.data.data
+                    console.log(res.data)
                     timeresult.forEach(item => {
                         item.testTime = date(item.testTime,'yyyy-MM-dd HH:mm:ss')
                     });

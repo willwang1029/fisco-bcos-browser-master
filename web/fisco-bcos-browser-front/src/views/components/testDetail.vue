@@ -122,57 +122,55 @@
             },
             sendFormatter(row,cellValue){
                 if(row.sendRate){
-                    return row.sendRate+' tps';
+                    return row.sendRate;
                 }
             },
             maxFormatter(row,cellValue){
                 if(row.maxLatency){
-                    return row.maxLatency+' s';
+                    return row.maxLatency;
                 }
             },
             minFormatter(row,cellValue){
                 if(row.minLatency){
-                    return row.minLatency+' s';
+                    return row.minLatency;
                 }
             },
             putFormatter(row,cellValue){
                 if(row.throughput){
-                    return row.throughput+' tps';
+                    return row.throughput;
                 }
             },
             maxmeFormatter(row,cellValue){
                 if(row.maxMemory){
-                    var result=(row.maxMemory/1048576).toFixed(1);
-                    return result+' MB';
+                    return row.maxMemory;
                 }
             },
             minmeFormatter(row,cellValue){
                 if(row.avgMemory){
-                    var result=(row.avgMemory/1048576).toFixed(1);
-                    return result+' MB';
+                    return row.avgMemory;
                 }
             },
             maxCPUFormatter(row,cellValue){
                 if(row.maxCPU){
-                    return row.maxCPU*100+'%';
+                    return row.maxCPU;
                 }
             },
             avgCPUFormatter(row,cellValue){
                 if(row.avgCPU){
-                    return row.avgCPU*100+'%';
+                    return row.avgCPU;
                 }
             },
             tinFormatter(row,cellValue){
-                return row.trafficIn+' B';
+                return row.trafficIn;
             },
             toutFormatter(row,cellValue){
-                return row.trafficOut+' B';
+                return row.trafficOut;
             },
             drFormatter(row,cellValue){
-                return row.discRead+' B';
+                return row.discRead;
             },
             dwFormatter(row,cellValue){
-                return row.discWrite+' B';
+                return row.discWrite;
             },
             ObjectToArray(object){
                 var array = [];

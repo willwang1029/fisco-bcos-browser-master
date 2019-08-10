@@ -94,8 +94,10 @@
                 this.inputs.push(obj);
             },
             teststart:function(){
+                this.groupId = localStorage.getItem("groupId")
                 let result={
-                    userName:this.ruleForm.userName
+                    userName:this.ruleForm.userName,
+                    groupId:this.groupId
                 }
                 jsonSave(result).then(res =>{
                     console.log(res.data.data);

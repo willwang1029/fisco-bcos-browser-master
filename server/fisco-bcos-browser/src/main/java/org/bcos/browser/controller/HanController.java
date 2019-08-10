@@ -68,7 +68,10 @@ public class HanController {
     }
 
     @GetMapping("/jsonSave")
-    public BaseResponse jsonSave(String userName) { return hservice.jsonSave(userName); }
+    public BaseResponse jsonSave(String userName, String groupId) {
+        hservice.readFiscoJson(groupId);
+        return hservice.jsonSave(userName);
+    }
 
     @PostMapping("/upload")
     public void uploadExam(@RequestParam("file") MultipartFile file, String file_name, String label, String duration,

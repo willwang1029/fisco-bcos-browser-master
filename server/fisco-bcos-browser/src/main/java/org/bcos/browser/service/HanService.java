@@ -134,6 +134,31 @@ public class HanService {
         }
     }
 
+    public BaseResponse readFiscoJson(String groupId) {
+        try {
+//            String config_name = "/Users/hannatao/Desktop/docker/fisco-bcos.json";
+            String config_name = "/packages/caliper-samples/network/fisco-bcos/test/fisco-bcos.json";
+            JSONObject config = JsonReadUtils.readJson(config_name);
+            List<Node> lists = nodeMapper.getAllNode(Integer.parseInt(groupId));
+            JSONArray nodes = new JSONArray();
+            for(Node node: lists) {
+                JSONObject node_config = new JSONObject();
+                node_config.put("ip", node.getIp());
+                node_config.put("rpcPort", node.getRpcPort());
+                node_config.put("channelPort", node.getP2pPort());
+                nodes.put(node_config);
+            }
+            JSONObject network = config.getJSONObject("fisco-bcos").getJSONObject("network");
+            network.put("nodes", nodes);
+            network.put("groupID", Integer.parseInt(groupId));
+            JsonReadUtils.saveJson(config_name, config);
+            return new BaseResponse(ConstantCode.SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new BaseResponse(ConstantCode.SYSTEM_ERROR);
+        }
+    }
+
     public BaseResponse config2(List<String[]> list) {
         try {
             Map m1, test;

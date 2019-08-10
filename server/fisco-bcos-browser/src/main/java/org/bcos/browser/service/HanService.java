@@ -137,7 +137,7 @@ public class HanService {
     public BaseResponse readFiscoJson(String groupId) {
         try {
 //            String config_name = "/Users/hannatao/Desktop/docker/fisco-bcos.json";
-            String config_name = "/packages/caliper-samples/network/fisco-bcos/test/fisco-bcos.json";
+            String config_name = "packages/caliper-samples/network/fisco-bcos/test/fisco-bcos.json";
             JSONObject config = JsonReadUtils.readJson(config_name);
             List<Node> lists = nodeMapper.getAllNode(Integer.parseInt(groupId));
             JSONArray nodes = new JSONArray();

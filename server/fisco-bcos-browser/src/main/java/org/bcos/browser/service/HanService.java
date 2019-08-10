@@ -145,7 +145,7 @@ public class HanService {
                 JSONObject node_config = new JSONObject();
                 node_config.put("ip", node.getIp());
                 node_config.put("rpcPort", node.getRpcPort());
-                node_config.put("channelPort", String.valueOf(Integer.parseInt(node.getP2pPort()) - 10000));
+                node_config.put("channelPort", String.valueOf(Integer.parseInt(node.getP2pPort()) - 10100));
                 nodes.put(node_config);
             }
             JSONObject network = config.getJSONObject("fisco-bcos").getJSONObject("network");

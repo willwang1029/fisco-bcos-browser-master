@@ -26,7 +26,7 @@ public class JsonReadUtils {
         File file = new File("/root/caliper-1/" + fileName);
         try {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file,false), "UTF-8"));
-            writer.write(JSON.toJSONString(JSON.parseObject(json.toString())));
+            writer.write(format(json.toString()));
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();
